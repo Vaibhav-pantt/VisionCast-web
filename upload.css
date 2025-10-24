@@ -21,62 +21,134 @@ html, body {
 /* ============================= */
 /* Navigation Bar */
 /* ============================= */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 18px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+/* ======================
+   Navbar Base Styles
+   ====================== */
+/* ======================
+   Navbar Base Styles
+   ====================== */
+/* ======================
+   Navbar Base Styles
+   ====================== */
+nav {
+display: flex;
+ justify-content: space-between; 
+ align-items: center;
+  padding: 1rem 2rem; 
+  background: rgba(255,255,255,0.2); 
+  backdrop-filter: blur(15px) saturate(180%); 
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+   border: 1px solid rgba(255,255,255,0.3); 
+   border-radius: 15px; 
+   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    position: sticky; 
+    top: 0;
+     z-index: 9999;
+      font-family: 'Inter', sans-serif;
+       transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav:hover {
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 12px 48px rgba(31, 38, 135, 0.15);
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #111;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.nav-links {
   display: flex;
-  gap: 2.5rem;
   align-items: center;
+  gap: 0.8rem;
 }
 
-.nav-links a {
+.logo .badge {
+  background: gold;
+  color: #222;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.logo h2 {
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: #222;
   text-decoration: none;
-  color: #111;
-  font-weight: 500;
+  font-weight: 600;
   position: relative;
+  transition: color 0.3s ease;
 }
 
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: #111;
-  transition: width 0.3s ease;
+.links a::after {
+content: ''; 
+position: absolute; 
+width: 0;
+ height: 2px; 
+bottom: -2px; 
+left: 0; 
+background-color: #000; 
+transition: width 0.2s ease;
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
+.links a:hover::after,
+.links a:focus::after {
   width: 100%;
 }
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #000;
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* more space between username and button */
 }
-/* Hamburger */
+
+.user-area span {
+  font-weight: 600;
+  color: #1a1a1a; /* dark, professional text */
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.user-area span:hover {
+  color: #007bff; /* professional blue highlight on hover */
+}
+
+.user-area button {
+  padding: 12px 24px; /* bigger, more clickable */
+  background: linear-gradient(135deg, #007bff, #00bcd4); /* professional blue-teal gradient */
+  color: #fff; /* white text for contrast */
+  border: none;
+  border-radius: 10px; /* rounded but professional */
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.35); /* subtle shadow */
+  transition: all 0.3s ease;
+}
+
+.user-area button:hover,
+.user-area button:focus {
+  transform: translateY(-2px) scale(1.03); /* slight zoom effect */
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5); /* stronger hover shadow */
+  background: linear-gradient(135deg, #00bcd4, #007bff); /* hover gradient flip */
+}
+
+/* Hamburger button */
+  /* ========================= */
+/* Hamburger + Responsive Nav */
+/* ========================= */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -84,7 +156,7 @@ html, body {
   width: 28px;
   height: 22px;
   background: transparent;
-  border: none;
+  border: 2px;
   cursor: pointer;
   z-index: 1100;
   transition: transform 0.3s ease;
@@ -94,9 +166,14 @@ html, body {
   display: block;
   width: 100%;
   height: 3px;
-  background-color: gold;
-  border-radius: 2px;
-  transition: all 0.28s ease;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+/* Hover glow pulse */
+.hamburger:hover span {
+  box-shadow: 0 0 12px rgb(254, 255, 255), 0 0 24px rgba(18, 17, 18, 0.962);
+  transform: scale(1.05);
 }
 
 /* Animate hamburger into X */
@@ -112,45 +189,150 @@ html, body {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Mobile */
+/* ========================= */
+/* Responsive Menu (Links Only) */
+/* ========================= */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 60px;
-    right: 14px;
-    width: 210px;
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: fadeIn 0.22s ease forwards;
-    z-index: 1050;
+  /* Hide desktop elements */
+  .user-area {
+    display: none !important;
   }
 
-  .navbar.expanded .nav-links {
-    display: flex;
+  .links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(52, 52, 52, 0.453); /* darker with slight transparency */
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    width: 230px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    backdrop-filter: blur(22px) saturate(200%);
+    -webkit-backdrop-filter: blur(22px) saturate(200%);
+    box-shadow: 0 8px 40px rgba(255, 253, 253, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: fadeOut 0.3s ease;
+    transition: all 0.3s ease;
   }
+
+  nav.expanded .links {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  nav.expanded .links a {
+  color: #ffffff;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+nav.expanded .links a:hover {
+  color: #020202;
+  
+}
+
+  /* Optional subtle neon border glow */
+  .links::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(45, 46, 46, 0.4), rgba(60, 58, 60, 0.3));
+  
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(-6px);
+      transform: translateY(-10px);
     }
     to {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
   }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .links, .user-area {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.15);
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 200px;
+      padding: 1rem;
+      border-radius: 12px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    nav.expanded .links,
+    nav.expanded .user-area {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  nav .links {
+    flex-basis: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  nav .user-area {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
 }
+
+
 
 /* ============================= */
 /* Main Content Layout */

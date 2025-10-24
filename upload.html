@@ -3,26 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Upload Video | Verbun</title>
+  <title>Upload Video | </title>
   <link rel="stylesheet" href="upload.css">
 </head>
 <body>
   <!--  Netflix-style Navbar -->
-<nav class="navbar">
-  <div class="logo">Verbun</div>
-
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#feed">Feed</a>
-    <a href="index.html#team">Profile</a>
+<nav>
+  <div class="logo">
+    <div class="badge">VC</div>
+    <h3>VisionCast</h3>
   </div>
 
-  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <div class="links" id="primary-navigation" role="menu">
+    <a href="index.html" role="menuitem">Home</a>
+    <a href="login.html" role="menuitem">Admin login</a>
+    <a href="index.html#feed" role="menuitem">Feed</a>
+    <a href="index.html#team" role="menuitem">Team</a>
+  </div>
+
+ <div class="user-area">
+  <span>Hello, Admin</span>
+  <button id="loginBtn">Login</button>
+</div>
+
+
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation" type="button">
     <span></span>
     <span></span>
     <span></span>
   </button>
 </nav>
+
 
 
   <main class="main">

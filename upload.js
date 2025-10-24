@@ -1,100 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // ===== Video Upload =====
   const fileInput = document.getElementById('fileInput');
   const uploadStatus = document.getElementById('uploadStatus');
   const clearBtn = document.getElementById('clearLocal');
 
-  // When user selects a file
-  fileInput.addEventListener('change', async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+  if (fileInput && uploadStatus && clearBtn) {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    // Ask user for a key before uploading
-    const key = prompt("🔑 Enter your upload key to save this video:");
-    if (!key) {
-      alert("Upload cancelled — key is required.");
-      return;
-    }
+      const key = prompt("🔑 Enter your upload key to save this video:");
+      if (!key) return alert("Upload cancelled — key is required.");
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64Video = e.target.result;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Video = e.target.result;
+        let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+        videos.push({ name: file.name, video: base64Video, key: key, time: new Date().toLocaleString() });
+        localStorage.setItem('videos', JSON.stringify(videos));
 
-      // Retrieve existing videos
-      let videos = JSON.parse(localStorage.getItem('videos') || '[]');
+        uploadStatus.textContent = "✅ Video saved locally!";
+        uploadStatus.style.color = "green";
+        fileInput.value = "";
+      };
+      reader.readAsDataURL(file);
+    });
 
-      // Add new video entry
-      videos.push({
-        name: file.name,
-        video: base64Video,
-        key: key,
-        time: new Date().toLocaleString()
-      });
-
-      // Save back to localStorage
-      localStorage.setItem('videos', JSON.stringify(videos));
-
-      uploadStatus.textContent = "✅ Video saved locally!";
-      uploadStatus.style.color = "green";
-      fileInput.value = "";
-    };
-
-    reader.readAsDataURL(file);
-  });
-
-  // Clear all videos from local storage
-  clearBtn.addEventListener('click', () => {
-    if (confirm("🗑️ Are you sure you want to delete all local videos?")) {
-      localStorage.removeItem('videos');
-      uploadStatus.textContent = "All local videos deleted!";
-      uploadStatus.style.color = "red";
-    }
-  });
-});
+    clearBtn.addEventListener('click', () => {
+      if (confirm("🗑️ Are you sure you want to delete all local videos?")) {
+        localStorage.removeItem('videos');
+        uploadStatus.textContent = "All local videos deleted!";
+        uploadStatus.style.color = "red";
+      }
+    });
+  }
 
 
-
-
-  // ====== Hamburger Menu ======
+  // ===== Hamburger Menu =====
   const hamburger = document.querySelector('.hamburger');
-  const navbar = document.querySelector('.navbar');
-  const navLinks = document.querySelector('.nav-links');
+  const nav = document.querySelector('nav');
+  const links = document.getElementById('primary-navigation');
 
-  if (hamburger && navbar && navLinks) {
-    const openMenu = () => {
-      navbar.classList.add('expanded');
+  if (hamburger && nav && links) {
+    function openMenu() {
+      nav.classList.add('expanded');
       hamburger.classList.add('active');
       hamburger.setAttribute('aria-expanded', 'true');
-    };
-    const closeMenu = () => {
-      navbar.classList.remove('expanded');
+    }
+    function closeMenu() {
+      nav.classList.remove('expanded');
       hamburger.classList.remove('active');
       hamburger.setAttribute('aria-expanded', 'false');
-    };
+    }
 
     hamburger.addEventListener('click', (e) => {
       e.stopPropagation();
-      navbar.classList.contains('expanded') ? closeMenu() : openMenu();
+      nav.classList.contains('expanded') ? closeMenu() : openMenu();
     });
 
     document.addEventListener('click', (e) => {
-      if (!navbar.classList.contains('expanded')) return;
-      if (!navbar.contains(e.target)) closeMenu();
+      if (nav.classList.contains('expanded') && !nav.contains(e.target)) closeMenu();
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navbar.classList.contains('expanded')) closeMenu();
+      if (e.key === 'Escape' && nav.classList.contains('expanded')) closeMenu();
     });
 
-    navLinks.addEventListener('click', (e) => {
+    links.addEventListener('click', (e) => {
       if (e.target.closest('a')) closeMenu();
     });
   }
 
 
+const loginBtn = document.getElementById('loginBtn');
 
-
-
-
-
-
-
+// Redirect to login.html when clicked
+loginBtn.addEventListener('click', () => {
+  window.location.href = 'login.html';
+});
+});
