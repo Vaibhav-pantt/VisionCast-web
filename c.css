@@ -603,7 +603,7 @@ h2, h3 {
   color: white;
 
   /* Fixed high-resolution background */
-  background-image: url("https://wallpapercave.com/wp/wp4671370.jpg");
+  background-image: url("oip3.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -864,7 +864,7 @@ footer p span {
   padding: 80px 20px;
   
   /* Background image applied to the section */
-  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+  background: url('') no-repeat center center / cover;
   filter: grayscale(100%);
   background-attachment: fixed;  /* For parallax effect */
   border-radius: 20px;
@@ -995,5 +995,218 @@ footer p span {
 
   .value {
     font-size: 1rem;
+  }
+}
+  .doodle-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-family: "Indie Flower", "Comic Sans MS", cursive;
+    color: #222;
+    font-size: 16px;
+    position: relative;
+  }
+
+  .copyright {
+    display: inline-block;
+    transform: rotate(-0.5deg);
+    background: #fff9f9;
+    padding: 10px 18px;
+    border-radius: 14px;
+    box-shadow: 2px 2px 0 #222;
+    border: 1.5px solid #222;
+  }
+
+  .brand {
+    font-weight: bold;
+    color: #f24e79;
+    text-shadow: 1px 1px 0 #0000001a;
+  }
+
+  .heart {
+    display: inline-block;
+    animation: pulse 1.2s infinite;
+    transform: rotate(-8deg);
+  }
+
+  .team {
+    font-style: italic;
+    color: #444;
+  }
+
+  .squiggle {
+    display: block;
+    width: 180px;
+    margin: 8px auto 0;
+    color: rgba(0, 0, 0, 0.3);
+    transform: rotate(-1deg);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1) rotate(-8deg); }
+    50% { transform: scale(1.2) rotate(-8deg); }
+  }
+  .video-section {
+background: linear-gradient(to right, #fefcea, #f1da36);
+  padding: 60px 20px;
+  margin-top: 80px; /* space after navbar */
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Section heading */
+.video-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+
+
+/* Section description */
+.video-description {
+  font-size: 1.05rem;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+  margin: 20px auto;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  padding: 15px 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: "Poppins", "Inter", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.video-description:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+}
+
+.video-description .highlight {
+  color: #e50914;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff6b6b, #e50914);
+  
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Video grid layout */
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Individual video item */
+.video-item {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.video-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Embedded YouTube iframe */
+.video-item iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Video description below video */
+.video-item p {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Star rating */
+.rating {
+  margin: 10px 0;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.video-item {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.rating {
+  margin-top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.star.active {
+  color: #FFD700; /* gold color for selected stars */
+}
+
+.rating-message {
+  font-size: 14px;
+  color: #28a745;
+  margin-top: 4px;
+  transition: opacity 0.4s ease;
+}
+/* Dark theme for the entire video section */
+.dark-theme .video-section {
+ background: linear-gradient(to right, #da2d02, #e7e5d0);
+}
+
+/* Dark theme for section heading */
+.dark-theme .video-section h2 {
+  color: rgb(198, 14, 23); /* keep the red accent */
+}
+
+/* Dark theme for section description */
+.dark-theme .video-description {
+  color: #bbb;
+}
+
+/* Dark theme for video items */
+
+/* Text inside video items */
+
+/* Dark theme star rating color */
+
+/* Dark theme */
+.dark-theme .video-description {
+  color: #b70e0e;           /* Softer red for dark background */
+  font-size: 1.15rem;       /* Slightly larger or same as above */
+}
+/* Responsive improvements */
+@media (max-width: 600px) {
+  .video-section h2 {
+    font-size: 2rem;
+  }
+
+  .video-description {
+    font-size: 1rem;
+  }
+
+  .video-item iframe {
+    height: 180px;
   }
 }

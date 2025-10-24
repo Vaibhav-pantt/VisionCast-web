@@ -1,103 +1,107 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  // ================== Video Feed ==================
   const feed = document.getElementById('feed');
-  const videos = JSON.parse(localStorage.getItem('videos') || '[]');
 
-  if (feed) {
+  function loadVideos() {
+    const videos = JSON.parse(localStorage.getItem('videos') || '[]');
     feed.innerHTML = "";
-    if (videos.length > 0) {
-      videos.forEach(videoObj => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-          <strong style="color:#e50914; display:block; margin-bottom:10px;">
-            ${videoObj.name}
-          </strong>
-          <video src="${videoObj.video}" controls width="100%"></video>
-        `;
-        feed.appendChild(card);
-      });
+
+    if (videos.length === 0) {
+      feed.innerHTML = `<p style="text-align:center; color:gray;">No videos uploaded yet 🎥</p>`;
+      return;
     }
-  }
 
-  // ================== Profile Upload ==================
-  const profileBadge  = document.getElementById('profileBadge');
-  const profileUpload = document.getElementById('profileUpload');
-  const chooseBtn     = document.getElementById('chooseBtn');
-  const removeBtn     = document.getElementById('removeBtn');
-  const initials      = profileBadge ? profileBadge.textContent : 'UD';
+    // Ask for key to view
+    const userKey = prompt("🔑 Enter your key to view your videos:");
+    if (!userKey) {
+      feed.innerHTML = `<p style="text-align:center; color:red;">No key entered. Access denied.</p>`;
+      return;
+    }
 
-  function resetProfile() {
-    if (!profileBadge) return;
-    profileBadge.style.backgroundImage = 'none';
-    profileBadge.textContent = initials;
-    profileBadge.style.color = 'var(--text-dark)';
-  }
+    // Filter videos for this key
+    const filteredVideos = videos.filter(v => v.key === userKey);
 
-  if (profileBadge) {
-    const saved = localStorage.getItem('profileImage');
-    if (saved) {
-      profileBadge.style.backgroundImage = `url('${saved}')`;
-      profileBadge.textContent = '';
-      profileBadge.style.color = 'transparent';
-    } else resetProfile();
-  }
+    if (filteredVideos.length === 0) {
+      feed.innerHTML = `<p style="text-align:center; color:gray;">No videos found for this key 🚫</p>`;
+      return;
+    }
 
-  function resizeImage(file, maxDim = 150) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          let { width, height } = img;
-          if (width > height && width > maxDim) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else if (height > width && height > maxDim) {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          } else if (width > maxDim) {
-            width = maxDim;
-            height = maxDim;
-          }
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL('image/jpeg', 0.8));
-        };
-        img.onerror = reject;
-        img.src = reader.result;
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
+    filteredVideos.forEach(video => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.innerHTML = `
+        <strong style="color:#e50914; display:block; margin-bottom:10px;">${video.name}</strong>
+        <video src="${video.video}" controls width="100%" style="border-radius:10px;"></video>
+      `;
+      feed.appendChild(card);
     });
   }
 
-  if (profileUpload) {
-    profileUpload.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file || !file.type.startsWith('image/')) return;
-      try {
-        const dataUrl = await resizeImage(file, 150);
-        profileBadge.style.backgroundImage = `url('${dataUrl}')`;
-        profileBadge.textContent = '';
-        profileBadge.style.color = 'transparent';
-        localStorage.setItem('profileImage', dataUrl);
-      } catch (err) {
-        console.error('Image processing failed', err);
-      }
-    });
-  }
+  loadVideos();
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const videos = document.querySelectorAll('.video-item');
 
-  if (chooseBtn) chooseBtn.addEventListener('click', () => profileUpload && profileUpload.click());
-  if (removeBtn) removeBtn.addEventListener('click', () => {
-    resetProfile();
-    if (profileUpload) profileUpload.value = '';
-    localStorage.removeItem('profileImage');
+  // Load saved ratings from localStorage
+  const savedRatings = JSON.parse(localStorage.getItem('videoRatings') || '{}');
+
+  videos.forEach(video => {
+    const videoId = video.getAttribute('data-video-id');
+    const stars = video.querySelectorAll('.star');
+
+    // Highlight previously saved rating
+    const savedRating = savedRatings[videoId];
+    if (savedRating) highlightStars(stars, savedRating);
+
+    // Add event listeners to each star
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const ratingValue = parseInt(star.getAttribute('data-value'));
+
+        // Save rating in localStorage
+        savedRatings[videoId] = ratingValue;
+        localStorage.setItem('videoRatings', JSON.stringify(savedRatings));
+
+        highlightStars(stars, ratingValue);
+
+        // Optional small animation or message
+        showMessage(video, `⭐ You rated this ${ratingValue}/5`);
+      });
+
+      // Hover effect preview
+      star.addEventListener('mouseover', () => {
+        const hoverValue = parseInt(star.getAttribute('data-value'));
+        highlightStars(stars, hoverValue);
+      });
+
+      // Reset to saved rating on mouse leave
+      star.addEventListener('mouseleave', () => {
+        const savedValue = savedRatings[videoId] || 0;
+        highlightStars(stars, savedValue);
+      });
+    });
   });
+
+  // Highlight stars up to a given value
+  function highlightStars(stars, value) {
+    stars.forEach(star => {
+      const starValue = parseInt(star.getAttribute('data-value'));
+      star.classList.toggle('active', starValue <= value);
+    });
+  }
+
+  // Optional helper to show a small confirmation message
+  function showMessage(video, text) {
+    let msg = video.querySelector('.rating-message');
+    if (!msg) {
+      msg = document.createElement('div');
+      msg.className = 'rating-message';
+      video.appendChild(msg);
+    }
+    msg.textContent = text;
+    msg.style.opacity = 1;
+    setTimeout(() => msg.style.opacity = 0, 2000);
+  }
+});
 
   // ================== Hamburger Menu ==================
   const hamburger = document.querySelector('.hamburger');
@@ -134,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-});
+
 const loginBtn = document.getElementById('loginBtn');
 
 // Redirect to login.html when clicked

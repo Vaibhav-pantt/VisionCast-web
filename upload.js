@@ -1,90 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput');
-  const displayNameInput = document.getElementById('displayName');
   const uploadStatus = document.getElementById('uploadStatus');
   const clearBtn = document.getElementById('clearLocal');
 
-  let adminKey = null; // store admin key once per session
+  // When user selects a file
+  fileInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-  function showStatus(message, type = 'success') {
-    const color = type === 'success' ? 'green' : 'red';
-    uploadStatus.innerHTML = `<span style="color:${color}; font-weight:bold;">${message}</span>`;
-    setTimeout(() => (uploadStatus.textContent = ""), 4000);
-  }
-
-  // ===== Upload video =====
-  fileInput?.addEventListener('change', async () => {
-    if (!adminKey) {
-      adminKey = prompt("Enter Admin Key");
-      if (!adminKey) return showStatus('Admin key required', 'error');
+    // Ask user for a key before uploading
+    const key = prompt("🔑 Enter your upload key to save this video:");
+    if (!key) {
+      alert("Upload cancelled — key is required.");
+      return;
     }
 
-    const files = Array.from(fileInput.files);
-    if (!files.length) return showStatus('No video selected.', 'error');
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Video = e.target.result;
 
-    const displayName = displayNameInput.value || 'Admin';
+      // Retrieve existing videos
+      let videos = JSON.parse(localStorage.getItem('videos') || '[]');
 
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append('video', file);
-      formData.append('displayName', displayName);
-      formData.append('adminKey', adminKey);
-
-      try {
-        const res = await fetch('http://localhost:5000/upload', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        if (data.success) showStatus(`✅ Uploaded ${file.name}!`);
-        else showStatus(`❌ Upload failed: ${data.error}`, 'error');
-      } catch (err) {
-        showStatus(`❌ Upload failed: ${err}`, 'error');
-      }
-    }
-
-    fileInput.value = null;
-  });
-
-  // ===== Clear local storage =====
-  clearBtn?.addEventListener('click', () => {
-    localStorage.removeItem('videos');
-    showStatus("🗑️ All local videos cleared!", "error");
-  });
-
-  // ===== Delete video from feed (example) =====
-  window.deleteVideo = async (fileId, card) => {
-    if (!adminKey) {
-      adminKey = prompt("Enter Admin Key");
-      if (!adminKey) return alert("Admin key required");
-    }
-
-    const confirmDelete = confirm("Are you sure you want to delete this video?");
-    if (!confirmDelete) return;
-
-    try {
-      const res = await fetch(`http://localhost:5000/delete/${fileId}?adminKey=${adminKey}`, {
-        method: 'DELETE'
+      // Add new video entry
+      videos.push({
+        name: file.name,
+        video: base64Video,
+        key: key,
+        time: new Date().toLocaleString()
       });
-      const data = await res.json();
-      if (data.success) card.remove();
-      else alert(`Failed: ${data.error}`);
-    } catch (err) {
-      alert(`Failed: ${err}`);
+
+      // Save back to localStorage
+      localStorage.setItem('videos', JSON.stringify(videos));
+
+      uploadStatus.textContent = "✅ Video saved locally!";
+      uploadStatus.style.color = "green";
+      fileInput.value = "";
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+  // Clear all videos from local storage
+  clearBtn.addEventListener('click', () => {
+    if (confirm("🗑️ Are you sure you want to delete all local videos?")) {
+      localStorage.removeItem('videos');
+      uploadStatus.textContent = "All local videos deleted!";
+      uploadStatus.style.color = "red";
     }
-  };
+  });
 });
 
-  // ================= Optional: Drag & Drop =================
-  const dropzone = document.getElementById('dropzone');
-  if (dropzone) {
-    dropzone.addEventListener('dragover', e => e.preventDefault());
-    dropzone.addEventListener('drop', e => {
-      e.preventDefault();
-      fileInput.files = e.dataTransfer.files; // set dropped files
-      fileInput.dispatchEvent(new Event('change')); // trigger upload
-    });
-  }
 
 
 
