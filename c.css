@@ -431,27 +431,108 @@ nav.expanded .links a:hover {
     z-index: 1;
 }
 
-/* EMERGENCE ANIMATION - RISES FROM MOUNTAINS */
+/* --- CINEMATIC POWERFUL RISE --- */
 .logo-3d.animate {
-    animation: mountainRise 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation: himalayCinematicRise 2.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
-@keyframes mountainRise {
+@keyframes himalayCinematicRise {
     0% {
         opacity: 0;
-        transform: translateZ(-200px) rotateX(-60deg) rotateY(0deg) scale(0.3);
+        transform: translateY(200px)
+                   translateZ(-200px)
+                   rotateX(45deg)
+                   scale(0.4);
+        filter: blur(25px) brightness(0.4);
     }
-    50% {
-        opacity: 0.7;
-        transform: translateZ(20px) rotateX(20deg) rotateY(-5deg) scale(0.9);
-        filter: blur(8px);
+
+    45% {
+        opacity: 0.8;
+        transform: translateY(-20px)
+                   translateZ(60px)
+                   rotateX(15deg)
+                   scale(1.08);
+        filter: blur(6px) brightness(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+                   translateZ(100px)
+                   rotateX(10deg)
+                   scale(1);
+        filter: blur(0) brightness(1);
+    }
+}
+
+/* ----- SUBTITLE BELOW LOGO ----- */
+.logo-subtitle,
+#subtitle {
+    position: relative;
+    z-index: 4; /* above the background and 3D layers */
+    margin-top: 0.6rem;
+    font-size: clamp(0.9rem, 1.8vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-weight: 400;
+    text-align: center;
+
+    /* Gradient text using Himalay theme */
+    background: linear-gradient(
+        135deg,
+        var(--himalay-snow) 0%,
+        var(--himalay-accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    animation: subtitleFloatUp 2s ease-out forwards;
+}
+
+/* Add staggered animation delay for second subtitle */
+#logo-subtitle {
+    animation-delay: 1.2s;
+}
+
+/* Glow effect behind subtitle */
+.logo-subtitle::after,
+#subtitle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 140%;
+    transform: translate(-50%, -50%);
+    background: var(--himalay-glow);
+    filter: blur(25px);
+    opacity: 0.5;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+/* --- Subtitles floating up animation --- */
+@keyframes subtitleFloatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.85);
+        filter: blur(6px);
+    }
+    60% {
+        opacity: 0.9;
+        transform: translateY(-6px) scale(1.05);
+        filter: blur(1px);
     }
     100% {
         opacity: 1;
-        transform: translateZ(80px) rotateX(10deg) rotateY(0deg) scale(1);
-        filter: blur(0px);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 }
+
 
 /* INTERACTIVE MOUSE TILT */
 .logo-3d:hover {
@@ -983,14 +1064,51 @@ h2, h3 {
   margin-bottom: 10px;
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-
-#team p {
-  font-size: 1.1rem;
-  color: #fff;
-  margin-bottom: 40px;
-  max-width: 800px;
+h3 {
+    font-family: 'Playfair Display', serif; /* classy, cinematic font */
+    font-size: clamp(1.5rem, 3vw, 1.5rem); /* responsive size */
+    font-weight: 700;
+  
+    color: var(--himalay-snow); /* soft snow-white */
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0.5rem 0;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2); /* subtle depth */
 }
 
+.role {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--himalay-secondary);
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+}
+.org-name {
+  font-family: 'Playfair Display', serif; /* elegant, cinematic font */
+  font-size: clamp(2rem, 5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, var(--himalay-snow), var(--himalay-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2); /* subtle depth */
+  text-align: center;
+}
+.subtitle {
+  display: block;
+  font-family: "Chiefland Variable", sans-serif;
+  font-variation-settings: "wght" 500;
+  font-size: clamp(1.4rem, 2vw, 2rem); /* larger and responsive */
+  font-weight: 500;
+  color: var(--himalay-snow);
+  letter-spacing: 1.5px;
+  margin-top: 0.4rem;
+  opacity: 0.9;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* subtle glow */
+}
 /* Team Grid */
 .team-grid {
   display: grid;
@@ -1033,11 +1151,7 @@ h2, h3 {
   margin-bottom: 5px;
 }
 
-.team-card .role {
-  font-weight: bold;
-  color: #ffd700;
-  margin-bottom: 10px;
-}
+
 
 /* Footer Styles */
 .footer-contact {
@@ -1402,7 +1516,7 @@ background: linear-gradient(to right, #fefcea, #f1da36);
 }
 
 /* Section heading */
-.video-section h2 {
+#uploaded-title {
   font-size: 2.5rem;
   margin-bottom: 10px;
   color: #222;
@@ -1471,7 +1585,7 @@ background: linear-gradient(to right, #fefcea, #f1da36);
 }
 
 /* Video description below video */
-.video-item p {
+.uploaded-description {
   font-size: 0.95rem;
   color: #333;
   margin-top: 10px;

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>User Dashboard </title>
   <link rel="stylesheet" href="c.css">
@@ -14,7 +17,7 @@
 <nav>
   <div class="logo">
     <div class="badge">VC</div>
-    <h3>HimaSeva</h3>
+    <h3>HimSeva</h3>
   </div>
 <!-- Example: add inside .user-area -->
 <button id="langBtn">हिंदी</button>
@@ -46,6 +49,7 @@
       <div class="logo-3d">
           <h1 id="logo-3d-title" data-text="HIMALAY DARSHAN">HIMALAYA DARSHAN</h1>
       </div>
+        <p id="subtitle" class="subtitle">social service organization</p>
       <p id="logo-subtitle" class="logo-subtitle">Strength • Resilience • Hope</p>
   </div>
 </section>
@@ -78,16 +82,17 @@
             <img src="https://via.placeholder.com/30" alt="user 1">
             <img src="https://via.placeholder.com/30" alt="user 2">
             <img src="https://via.placeholder.com/30" alt="user 3">
-            <span>Plus 253 Trusted users!</span>
+           <span id="trusted-users-text" class="english-text">Plus 253 Trusted users!</span>
         </div>
-        <h1 class="hero-title">
-            Discover your best <br><em>Perfume</em> today
-        </h1>
-        <p class="hero-subtitle">
-            Premium fashion and accessories curated just for you. Shop the latest trends and timeless classics now.
-        </p>
+     <h1 class="hero-title" id="hero-title" >
+        Latest <br><em>Disaster Updates</em>
+    </h1>
+   <p class="hero-subtitle" id="hero-subtitle" class="english-text">
+        Stay informed about recent natural disasters, emergencies, and critical alerts. Get timely updates to know what’s happening and how you can stay safe.
+    </p>
+
      <div class="button-group">
-    <button class="explore-btn">Explore</button>
+    <button class="explore-btn" id="explore-btn" class="english-text">Explore</button>
     <button class="arrow-btn">→</button>
 </div>
 
@@ -97,21 +102,21 @@
     <div class="hero-image-area">
         <div class="flower-images"></div>
         <div class="product-image">
-            <div class="product-text-overlay">
-                DEAR ME<br>
-                Sacred Secret<br>
-                ILLUMINATING SAFFRON SERUM
-            </div>
+            <div class="product-text-overlay" id="product-text" class="english-text">
+              DEAR ME<br>
+              Sacred Secret<br>
+              ILLUMINATING SAFFRON SERUM
+          </div>
         </div>
     </div>
 </section>
 
 
 <section id="video-section" class="video-section">
-  <h2>Uploaded by Admin </h2>
-<p class="video-description">
-  All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for  content.
-</p>
+    <h2 id="uploaded-title" class="english-text">Uploaded by Admin</h2>
+    <p id="uploaded-description" class="english-text">
+        All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for content.
+    </p>
 
 
   <div class="video-list">
@@ -155,69 +160,19 @@
     </div>
 
     <!-- Video 4 -->
-    <div class="video-item" data-video-id="4" tabindex="0">
-      <iframe src="https://www.youtube.com/embed/WlWtU6pprCE" title="Basic Chinese Grammar" frameborder="0" allowfullscreen></iframe>
-      <div class="rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <p>Understand essential </p>
-    </div>
-
+  
     <!-- Video 5 -->
-    <div class="video-item" data-video-id="5" tabindex="0">
-      <iframe src="https://www.youtube.com/embed/twvzGWVWCOk" title="Chinese Pinyin Practice" frameborder="0" allowfullscreen></iframe>
-      <div class="rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <p>Rate this video to help us improve the content!</p>
-    </div>
+  
 
     <!-- Video 6 -->
-    <div class="video-item" data-video-id="6" tabindex="0">
-      <iframe src="https://www.youtube.com/embed/bzKSEQSvkB8" title="Tones in Mandarin" frameborder="0" allowfullscreen></iframe>
-      <div class="rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <p>Master .</p>
-    </div>
+ 
 
     <!-- Video 7 -->
-    <div class="video-item" data-video-id="7" tabindex="0">
-      <iframe src="https://www.youtube.com/embed/1t7WFEew3zY" title="Chinese Vocabulary Builder" frameborder="0" allowfullscreen></iframe>
-      <div class="rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <p> words.</p>
-    </div>
+
 
     <!-- Video 8 -->
-    <div class="video-item" data-video-id="8" tabindex="0">
-      <iframe src="https://www.youtube.com/embed/vUgsVXA8W1E" title="Chinese Listening Practice" frameborder="0" allowfullscreen></iframe>
-      <div class="rating">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <p>video .</p>
-    </div>
+  
+     
   </div>
 </section>
 
@@ -276,16 +231,52 @@
   </div>
 </section>
 <section id="team" class="team-section">
-<h2>Meet the Minds Behind Verbun</h2>
-    <p>The creative individuals who bring life to our language learning platform.</p>
+  <h2 id="team-title" class="english-text">
+        Meet the Minds Behind HIMALAYA DARSHAN<br>
+        social service organization
+    </h2>
+    <p id="team-description" class="english-text">
+        The creative individuals who bring life to our language learning platform.
+    </p>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="OIP (2).jpeg" alt="vaibhav pant" class="team-img" />
+           <h3 id="team-member" class="english-text">MUNA JOSHI</h3>
+
+   <p id="team-role" class=" role">Founder of</p>
+    <p id="org-info" class=" org-name">
+        HIMALAYA DARSHAN<br>
+        <span id="org-subtitle" class="subtitle">social service organization</span>
+    </p>
+
+
+</div>
 
     <div class="team-grid">
       <div class="team-card">
         <img src="OIP (2).jpeg" alt="vaibhav pant" class="team-img" />
-        <h3>Vaibhav Pant</h3>
-        <p class="role">UI/UX Designer</p>
-        <p>Designs intuitive and elegant user experiences that make learning feel effortless.</p>
-      </div>
+        <h3>MUNA JOSHI</h3>
+
+  <p class="role">Member of</p>
+  <p class="org-name">
+    HIMALAYA DARSHAN<br>
+    <span class="subtitle">social service organization</span>
+  </p>
+
+</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="OIP (2).jpeg" alt="vaibhav pant" class="team-img" />
+        <h3>MUKUL PANT</h3>
+
+  <p class="role">Member of</p>
+  <p class="org-name">
+    HIMALAYA DARSHAN<br>
+    <span class="subtitle">social service organization</span>
+  </p>
+
+</div>
+     
       <!-- Additional team members can be added here -->
     </div>
 </section>

@@ -174,22 +174,28 @@ loginBtn.addEventListener('click', () => {
   window.location.href = 'login.html';
 });
 
-
 let isHindi = false;
 
 const translations = {
   // Hero
   "logo-3d-title": { en: "HIMALAY DARSHAN", hi: "हिमालय दर्शन" },
+  "subtitle": { en: "Social Service Organization", hi: "सामाजिक सेवा संस्थान" },
   "logo-subtitle": { en: "Strength • Resilience • Hope", hi: "शक्ति • सहनशीलता • आशा" },
 
   // About
   "about-title": { en: "About Himalay Darshan", hi: "हिमालय दर्शन के बारे में" },
-  "about-p1": { en: "Founded in 2019, Himalay Darshan is dedicated to addressing discrimination, social challenges, and human welfare issues.",
-                hi: "2019 में स्थापित, हिमालय दर्शन भेदभाव, सामाजिक चुनौतियों और मानव कल्याण मुद्दों को हल करने के लिए समर्पित है।" },
-  "about-p2": { en: "Guided by integrity and inspired by the enduring strength of the Himalayas, we provide structured support, awareness programs, and empowerment resources for individuals facing social inequities and personal struggles.",
-                hi: "सत्यनिष्ठा द्वारा मार्गदर्शित और हिमालय की अटल शक्ति से प्रेरित, हम सामाजिक असमानताओं और व्यक्तिगत संघर्षों का सामना करने वाले व्यक्तियों के लिए संरचित समर्थन, जागरूकता कार्यक्रम और सशक्तिकरण संसाधन प्रदान करते हैं।" },
-  "about-p3": { en: "Just as the mountains stand firm against every storm, Himalay Darshan stands with people in their toughest moments—helping them find clarity, resilience, and hope.",
-                hi: "जैसे पहाड़ हर तूफान का सामना करते हैं, हिमालय दर्शन लोगों के सबसे कठिन समय में उनके साथ खड़ा रहता है—उन्हें स्पष्टता, सहनशीलता और आशा खोजने में मदद करता है।" },
+  "about-p1": { 
+    en: "Founded in 2019, Himalay Darshan is dedicated to addressing discrimination, social challenges, and human welfare issues.",
+    hi: "2019 में स्थापित, हिमालय दर्शन भेदभाव, सामाजिक चुनौतियों और मानव कल्याण मुद्दों को हल करने के लिए समर्पित है।" 
+  },
+  "about-p2": { 
+    en: "Guided by integrity and inspired by the enduring strength of the Himalayas, we provide structured support, awareness programs, and empowerment resources for individuals facing social inequities and personal struggles.",
+    hi: "सत्यनिष्ठा द्वारा मार्गदर्शित और हिमालय की अटल शक्ति से प्रेरित, हम सामाजिक असमानताओं और व्यक्तिगत संघर्षों का सामना करने वाले व्यक्तियों के लिए संरचित समर्थन, जागरूकता कार्यक्रम और सशक्तिकरण संसाधन प्रदान करते हैं।" 
+  },
+  "about-p3": { 
+    en: "Just as the mountains stand firm against every storm, Himalay Darshan stands with people in their toughest moments—helping them find clarity, resilience, and hope.",
+    hi: "जैसे पहाड़ हर तूफान का सामना करते हैं, हिमालय दर्शन लोगों के सबसे कठिन समय में उनके साथ खड़ा रहता है—उन्हें स्पष्टता, सहनशीलता और आशा खोजने में मदद करता है।" 
+  },
 
   // User Info
   "user-info-title": { en: "👤 User Information", hi: "👤 उपयोगकर्ता जानकारी" },
@@ -202,16 +208,71 @@ const translations = {
   // Footer
   "footer-doodle-brand": { en: "VisionCast", hi: "विजनकास्ट" },
   "footer-doodle-rights": { en: "All rights are reserved", hi: "सर्वाधिकार सुरक्षित हैं" },
-  "footer-doodle-team": { en: "by the VisionCast Team", hi: "VisionCast टीम द्वारा" }
+  "footer-doodle-team": { en: "by the VisionCast Team", hi: "VisionCast टीम द्वारा" },
+
+  //latest news
+   "trusted-users-text": { en: "Plus 253 Trusted users!", hi: "253+ विश्वसनीय उपयोगकर्ता!" },
+  "hero-title": { en: "Latest <br><em>Disaster Updates</em>", hi: "नवीनतम <br><em>आपदा अपडेट्स</em>" },
+  "hero-subtitle": { 
+    en: "Stay informed about recent natural disasters, emergencies, and critical alerts. Get timely updates to know what’s happening and how you can stay safe.", 
+    hi: "हाल की प्राकृतिक आपदाओं, आपात स्थितियों और महत्वपूर्ण अलर्ट के बारे में सूचित रहें। समय पर अपडेट पाएं और जानें कि क्या हो रहा है और कैसे सुरक्षित रहें।"
+  },
+  "explore-btn": { en: "Explore", hi: "अन्वेषण करें" },
+  "product-text": { 
+    en: "DEAR ME<br>Sacred Secret<br>ILLUMINATING SAFFRON SERUM", 
+    hi: "डियर मी<br>पवित्र रहस्य<br>प्रकाशमान केसर सीरम"
+  },   "uploaded-title": { en: "Uploaded by Admin", hi: "एडमिन द्वारा अपलोड किया गया" },
+    "uploaded-description": { 
+        en: "All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for content.", 
+        hi: "सभी वीडियो  हिमालय दर्शन एडमिन टीम द्वारा सत्यापित और अपलोड किए जाते हैं — आपका विश्वसनीय स्रोत।" 
+    },
+        "team-title": {
+        en: "Meet the Minds Behind HIMALAYA DARSHAN<br>social service organization",
+        hi: "हिमालय दर्शन के पीछे के विचारशील लोग<br>सामाजिक सेवा संस्थान"
+    },
+    "team-description": {
+        en: "The creative individuals who bring life to our language learning platform.",
+        hi: "वे रचनात्मक व्यक्ति जो हमारे भाषा सीखने वाले प्लेटफ़ॉर्म में जीवन लाते हैं।"
+    },
+    "team-member": {
+        en: "MUNA JOSHI",
+        hi: "मुणा जोशी"
+    },
+    "team-role": {
+        en: "Founder of",
+        hi: "संस्थापक"
+    },
+    "org-info": {
+        en: "HIMALAYA DARSHAN",
+        hi: "हिमालय दर्शन सामाजिक सेवा संस्थान"
+    },
+    "org-subtitle": {
+        en: "social service organization",
+        hi: "सामाजिक सेवा संस्थान"
+    }
 };
 
+
+
+// Language toggle with font support
 document.getElementById("langBtn").addEventListener("click", () => {
   isHindi = !isHindi;
   const lang = isHindi ? "hi" : "en";
 
   for (const id in translations) {
     const elem = document.getElementById(id);
-    if (elem) elem.innerText = translations[id][lang];
+    if (elem) {
+        elem.innerHTML = translations[id][lang];
+
+      // Apply font classes
+      if (lang === "hi") {
+        elem.classList.add("hindi-text");
+        elem.classList.remove("english-text");
+      } else {
+        elem.classList.add("english-text");
+        elem.classList.remove("hindi-text");
+      }
+    }
   }
 });
 
