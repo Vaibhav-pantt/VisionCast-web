@@ -21,22 +21,29 @@ body {
 
     /* Navbar */
 nav {
-display: flex;
- justify-content: space-between; 
- align-items: center;
-  padding: 1rem 2rem; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0rem 1.8rem;
+  
+  width: 100%;              /* ⭐ IMPORTANT */
+  position: fixed;          /* stays on top */
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
   background: rgba(255,255,255,0.2); 
-  backdrop-filter: blur(15px) saturate(180%); 
+  backdrop-filter: blur(15px) saturate(180%);
   -webkit-backdrop-filter: blur(15px) saturate(180%);
-   border: 1px solid rgba(255,255,255,0.3); 
-   border-radius: 15px; 
-   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    position: sticky; 
-    top: 0;
-     z-index: 9999;
-      font-family: 'Inter', sans-serif;
-       transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.3); 
+  border-radius: 0 0 15px 15px;   /* bottom round only */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+
+
 
 nav:hover {
   background: rgba(255,255,255,0.25);
@@ -155,7 +162,7 @@ transition: width 0.2s ease;
   display: block;
   width: 100%;
   height: 3px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(5, 5, 5);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
@@ -320,69 +327,410 @@ nav.expanded .links a:hover {
     margin-top: 0.5rem;
   }
 }
+/* 🌄 HIMALAY DARSHAN - 3D MOUNTAIN LOGO SECTION */
+:root {
+    --himalay-primary: #2D5016;
+    --himalay-secondary: #A8B5A2;
+    --himalay-accent: #D4A574;
+    --himalay-snow: #F8F9FA;
+    --himalay-glow: rgba(212, 165, 116, 0.6);
+}
+
+.mountain-logo-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    background: 
+        linear-gradient(135deg, var(--himalay-primary) 0%, #1A3C2B 50%, #0F241A 100%),
+        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=cover&w=1950&q=85');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.mountain-logo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(212, 165, 116, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(168, 181, 162, 0.25) 0%, transparent 50%);
+    z-index: 1;
+}
+
+/* 3D LOGO CONTAINER - EMERGES FROM MOUNTAINS */
+.logo-3d-container {
+    position: relative;
+    z-index: 3;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+
+.logo-3d {
+    position: relative;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    cursor: grab;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* MAIN 3D TEXT */
+.logo-3d h1 {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    color: transparent;
+    
+    /* Multi-layer 3D effect */
+    background: linear-gradient(135deg, #F8F9FA 0%, #E8D5C4 50%, #D4A574 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 3D Transform Stack */
+    transform: translateZ(80px) rotateX(10deg) rotateY(0deg);
+    position: relative;
+}
+
+/* 3D SHADOW LAYERS (Creates depth) */
+.logo-3d::before,
+.logo-3d::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: inherit;
+}
+
+.logo-3d::before {
+    color: rgba(45, 80, 22, 0.8);
+    transform: translateZ(40px) rotateX(5deg);
+    z-index: 2;
+}
+
+.logo-3d::after {
+    color: rgba(26, 42, 30, 0.6);
+    transform: translateZ(0px) rotateX(0deg);
+    z-index: 1;
+}
+
+/* EMERGENCE ANIMATION - RISES FROM MOUNTAINS */
+.logo-3d.animate {
+    animation: mountainRise 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes mountainRise {
+    0% {
+        opacity: 0;
+        transform: translateZ(-200px) rotateX(-60deg) rotateY(0deg) scale(0.3);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateZ(20px) rotateX(20deg) rotateY(-5deg) scale(0.9);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateZ(80px) rotateX(10deg) rotateY(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+/* INTERACTIVE MOUSE TILT */
+.logo-3d:hover {
+    cursor: grab;
+    transform: translateZ(100px) rotateX(5deg) rotateY(5deg);
+}
+
+.logo-3d:active {
+    cursor: grabbing;
+}
+
+/* GLOW EFFECT */
+.logo-3d::selection {
+    background: var(--himalay-accent);
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 200px;
+    background: radial-gradient(circle, var(--himalay-glow) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* SUBTITLE */
+.logo-subtitle {
+    margin-top: 2rem;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(248, 249, 250, 0.95);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2.8s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 799px) {
+    .mountain-logo-section {
+        padding: 1rem;
+        background-attachment: scroll;
+    }
+    
+    .logo-3d h1 {
+        letter-spacing: -0.02em;
+    }
+}
+
+/* 🌄 PERFECT 480px MOBILE - SMALL PHONE OPTIMIZATION */
+@media (max-width: 480px) {
+      .mountain-logo {
+        min-height: 88vh;
+        padding: 1.25rem 1rem;
+        
+        /* ULTRA-CLEAN MOBILE BACKGROUND */
+        background: 
+            linear-gradient(135deg, rgba(45, 80, 22, 0.92) 0%, rgba(26, 60, 43, 0.95) 100%),
+            url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=cover&w=1950&q=85') !important;
+        background-size: 150% auto !important;
+        background-position: center 25% !important;
+        background-attachment: scroll !important;
+        background-repeat: no-repeat !important;
+    }
+}
+    
+    /* ULTRA-OPTIMIZED LOGO */
+    .logo-3d-container {
+        perspective: 500px;
+    }
+    
+    .logo-3d h1 {
+        font-size: clamp(2.6rem, 9.5vw, 4.8rem) !important;
+        letter-spacing: -0.015em !important;
+        line-height: 0.93 !important;
+        padding: 0 0.4rem !important;
+        max-width: 98vw !important;
+        margin: 0 auto !important;
+    }
+    
+    /* SIMPLIFIED 3D FOR PERFORMANCE */
+    .logo-3d {
+        transform: translateZ(35px) rotateX(7deg) !important;
+    }
+    
+    .logo-3d::before {
+        transform: translateZ(15px) rotateX(2deg) !important;
+        opacity: 0.85;
+    }
+    
+    .logo-3d::after {
+        transform: translateZ(-3px) !important;
+        opacity: 0.7;
+    }
+    
+    /* COMPACT GLOW */
+    .logo-glow {
+        width: 240px;
+        height: 120px;
+        filter: blur(16px);
+    }
+    
+    /* PERFECT SUBTITLE */
+    .logo-subtitle {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        padding: 0 0.75rem;
+        margin-top: 1.25rem;
+        max-width: 92vw;
+    }
+    
+    /* TOUCH OPTIMIZED */
+    .logo-3d:active {
+        transform: translateZ(45px) rotateX(4deg) scale(0.97) !important;
+    }
+
+
+
+
+/* SHORT MOBILE SCREENS */
+@media (max-height: 650px) and (max-width: 480px) {
+    .mountain-logo-section {
+        min-height: 85vh;
+    }
+    
+    .logo-subtitle {
+        margin-top: 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+
 
 /* About Section */
-/* About Section */
+
+
+/* ABOUT SECTION - REFINED ELEGANCE */
+/* 🌄 SIMPLE CLASSIC ABOUT SECTION - MINIMALIST DESIGN */
 .about-glass {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 8rem 3rem;
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
-    background-size: cover;
-    background-position: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
 }
 
 .about-content {
-    background: rgba(255, 255, 255, 0.15); /* glass effect */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 4rem 3rem;
-    border-radius: 25px;
     max-width: 800px;
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #073B4C;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.about-content:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    padding: 3rem 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(168, 181, 162, 0.2);
 }
 
 .about-content h2 {
-    font-size: 3rem; /* bigger, modern heading */
-    margin-bottom: 1.5rem;
-    color: #2575fc; /* modern accent color */
-    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: #2D5016;
+    margin: 0 0 2.5rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+}
+
+.about-content h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #D4A574;
+    margin: 1rem auto 0;
+    border-radius: 1px;
 }
 
 .about-content p {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: #073B4C;
-    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    color: #1A2A1E;
+    line-height: 1.75;
+    margin: 0 0 1.75rem 0;
+    font-weight: 300;
 }
 
-.section-heading {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: #2575fc;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.about-content p:last-of-type {
+    font-style: italic;
+    color: #2D5016;
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
-.section-description {
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .about-glass {
+        min-height: 95vh;
+        padding: 3rem 1.5rem;
+    }
+    
+    .about-content {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    
+    .about-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-content {
+        padding: 2rem 1.25rem;
+    }
+}
+
+
+
+
+
+
+/* NAVIGATION - ELEGANT STICKY */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(248, 249, 250, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(168, 181, 162, 0.3);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
     font-size: 1.5rem;
-    line-height: 1.8;
-    color: #444;
-    margin-bottom: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--himalay-primary), var(--himalay-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
+/* RESPONSIVE PERFECTION */
+@media (max-width: 768px) {
+    .hero-content, .about-content {
+        padding: 3rem 2rem;
+        margin: 1rem;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0;
+    }
+}
+
 
 /* Mobile Responsive */
 @media (max-width: 1024px) {
@@ -1210,3 +1558,259 @@ background: linear-gradient(to right, #fefcea, #f1da36);
     height: 180px;
   }
 }
+/* Prevent any horizontal scroll */
+* {
+    box-sizing: border-box;
+}
+body, html {
+    overflow-x: hidden;
+}
+
+/* Main Section */
+.hero-section {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 25px;
+    padding: 80px 25px;        /* ⬆️ Increased top/bottom space */
+    background: #ffffff;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);  /* soft depth */
+}
+
+
+.hero-content {
+    flex: 1;                        /* FIXED (was flex:1.) */
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Trusted Users */
+.trusted-users {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.trusted-users img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease;
+}
+
+.trusted-users img:hover {
+    transform: scale(1.08);
+}
+
+.trusted-users span {
+    margin-left: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+    padding: 6px 14px;
+    border-radius: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 10px 0 15px 0;
+    line-height: 1.05;
+}
+
+.hero-title em {
+    font-family: 'Playfair Display', serif;
+    color: #d4a77e;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+.button-group {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.explore-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 28px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.explore-btn:hover,
+.explore-btn:focus {
+    background-color: #555;
+    border-color: #555;
+    color: #fff;
+    outline: none;
+}
+
+.arrow-btn {
+    background-color: #eee;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    position: absolute;
+    right: 0px; 
+    left: 150px ;/* Positions arrow on RIGHT side, adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.arrow-btn:hover,
+.arrow-btn:focus {
+    background-color: #ddd;
+    border-color: #999;
+    color: #000;
+    outline: none;
+}
+
+
+/* Right Image Area */
+.hero-image-area {
+    flex: 1.2;
+    min-width: 320px;               /* Reduced from 350px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;               /* 💥 Prevent scroll overflow */
+}
+
+/* Product Image */
+.product-image {
+    width: 340px;                   /* Reduced slightly */
+    height: 500px;
+    border-radius: 18px;
+    background: url('https://th.bing.com/th/id/OIP.EymcwoQSlatF4prgCrqdFQHaFP?w=151&h=108&c=7&qlt=90&bgcl=b2dd25&r=0&o=6&dpr=1.3&pid=13.1');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Overlay Text */
+.product-text-overlay {
+    position: absolute;
+    text-align: center;
+    color: #d4a77e;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 750px) {
+
+    .hero-section {
+        flex-direction: column;
+        padding: 30px 18px;
+        text-align: center;                  /* Center text for modern mobile UI */
+        gap: 30px;
+    }
+
+    .hero-title {
+        font-size: 9vw;                      /* Smooth responsive title */
+        line-height: 1.1;
+    }
+
+    .hero-subtitle {
+        font-size: 4vw;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    .trusted-users {
+        justify-content: center;             /* Center the avatars */
+        margin-bottom: 15px;
+    }
+.explore-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.arrow-btn {
+    background-color: #eee;
+    color: #333;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+}
+    .hero-image-area {
+        width: 100%;
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .product-image {
+        width: 90%;                           /* Wider & more premium */
+        max-width: 380px;                     /* Prevent too large */
+        height: 450px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);   /* Clean drop shadow */
+        transform: translateY(0);
+        animation: floatUp 0.8s ease-out;     /* Smooth entry animation */
+    }
+
+    .product-text-overlay {
+        font-size: 1.2rem;                    /* Resize overlay text */
+        width: 90%;
+        line-height: 1.4;
+    }
+}
+
+/* Floating animation (premium feeling) */
+@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

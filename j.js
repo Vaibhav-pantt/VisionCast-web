@@ -1,3 +1,31 @@
+// Auto-trigger mountain rise animation on load
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo-3d');
+    setTimeout(() => logo.classList.add('animate'), 500);
+    
+    // Mouse tilt interaction
+    const container = document.querySelector('.logo-3d-container');
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateY = (x - centerX) / 20;
+        const rotateX = (y - centerY) / -20;
+        
+        logo.style.transform = `
+            translateZ(80px) 
+            rotateX(${rotateX}deg) 
+            rotateY(${rotateY}deg)
+        `;
+    });
+    
+    container.addEventListener('mouseleave', () => {
+        logo.style.transform = 'translateZ(80px) rotateX(10deg) rotateY(0deg)';
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const feed = document.getElementById('feed');
 
@@ -144,6 +172,47 @@ const loginBtn = document.getElementById('loginBtn');
 // Redirect to login.html when clicked
 loginBtn.addEventListener('click', () => {
   window.location.href = 'login.html';
+});
+
+
+let isHindi = false;
+
+const translations = {
+  // Hero
+  "logo-3d-title": { en: "HIMALAY DARSHAN", hi: "हिमालय दर्शन" },
+  "logo-subtitle": { en: "Strength • Resilience • Hope", hi: "शक्ति • सहनशीलता • आशा" },
+
+  // About
+  "about-title": { en: "About Himalay Darshan", hi: "हिमालय दर्शन के बारे में" },
+  "about-p1": { en: "Founded in 2019, Himalay Darshan is dedicated to addressing discrimination, social challenges, and human welfare issues.",
+                hi: "2019 में स्थापित, हिमालय दर्शन भेदभाव, सामाजिक चुनौतियों और मानव कल्याण मुद्दों को हल करने के लिए समर्पित है।" },
+  "about-p2": { en: "Guided by integrity and inspired by the enduring strength of the Himalayas, we provide structured support, awareness programs, and empowerment resources for individuals facing social inequities and personal struggles.",
+                hi: "सत्यनिष्ठा द्वारा मार्गदर्शित और हिमालय की अटल शक्ति से प्रेरित, हम सामाजिक असमानताओं और व्यक्तिगत संघर्षों का सामना करने वाले व्यक्तियों के लिए संरचित समर्थन, जागरूकता कार्यक्रम और सशक्तिकरण संसाधन प्रदान करते हैं।" },
+  "about-p3": { en: "Just as the mountains stand firm against every storm, Himalay Darshan stands with people in their toughest moments—helping them find clarity, resilience, and hope.",
+                hi: "जैसे पहाड़ हर तूफान का सामना करते हैं, हिमालय दर्शन लोगों के सबसे कठिन समय में उनके साथ खड़ा रहता है—उन्हें स्पष्टता, सहनशीलता और आशा खोजने में मदद करता है।" },
+
+  // User Info
+  "user-info-title": { en: "👤 User Information", hi: "👤 उपयोगकर्ता जानकारी" },
+  "label-fullname": { en: "Full Name", hi: "पूरा नाम" },
+  "label-email": { en: "Email", hi: "ईमेल" },
+  "label-phone": { en: "Phone", hi: "फ़ोन" },
+  "label-country": { en: "Country", hi: "देश" },
+  "label-role": { en: "Account Type", hi: "खाता प्रकार" },
+
+  // Footer
+  "footer-doodle-brand": { en: "VisionCast", hi: "विजनकास्ट" },
+  "footer-doodle-rights": { en: "All rights are reserved", hi: "सर्वाधिकार सुरक्षित हैं" },
+  "footer-doodle-team": { en: "by the VisionCast Team", hi: "VisionCast टीम द्वारा" }
+};
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  isHindi = !isHindi;
+  const lang = isHindi ? "hi" : "en";
+
+  for (const id in translations) {
+    const elem = document.getElementById(id);
+    if (elem) elem.innerText = translations[id][lang];
+  }
 });
 
 

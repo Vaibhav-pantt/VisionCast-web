@@ -1,275 +1,298 @@
-  <!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Hamburger Debug Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glassmorphism Frosty Nav</title>
+
 <style>
-
 :root {
-  --bg: #f5f7fa;
+    --himalay-primary: #2D5016;
+    --himalay-secondary: #A8B5A2;
+    --himalay-accent: #D4A574;
+    --himalay-snow: #F8F9FA;
+
+    /* Upgraded glow */
+    --himalay-glow: rgba(212, 165, 116, 0.55);
+    --himalay-ice-glow: rgba(255, 255, 255, 0.65);
 }
 
-body {
-  font-family: Poppins, Inter, sans-serif;
-  background: var(--bg);
-  margin: 0;
-
-/* adjust to your nav height */
-
-
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.75rem 3rem; 
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(15px) saturate(180%);
-  -webkit-backdrop-filter: blur(15px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  font-family: 'Inter', sans-serif;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-nav:hover {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 12px 48px rgba(31, 38, 135, 0.15);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.badge {
-  background: gold;
-  color: #111;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
-}
-
-.links {
-  display: flex;
-  gap: 1rem;
-}
-
-.links a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 600;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #007bff;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.links a:hover::after,
-.links a:focus::after {
-  width: 100%;
-}
-
-.user-area {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.user-area button {
-  background: #007bff;
-  color: #fff;
-  border: 0;
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.45);
-}
-
-.user-area button:hover,
-.user-area button:focus {
-  background: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 86, 179, 0.6);
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  z-index: 1100;
-  transition: transform 0.3s ease;
-}
-
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: gold;
-  border-radius: 2px;
-  transition: all 0.28s ease;
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .hamburger {
+/* MOUNTAIN BACKGROUND */
+.mountain-logo-section {
+    min-height: 100vh;
     display: flex;
-  }
-
-  .user-area {
-    display: none !important;
-  }
-
-  .links {
-    display: none;
     flex-direction: column;
-    position: fixed;
-    top: 70px;
-    right: 14px;
-    width: 210px;
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: fadeIn 0.22s ease forwards;
-    z-index: 1050;
-  }
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
 
-  nav.expanded .links {
-    display: flex;
-  }
+    background:
+        linear-gradient(135deg, var(--himalay-primary), #1A3C2B 40%, #0B1A13 100%),
+        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=cover&w=1950&q=85');
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-6px);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+/* GOLD + MIST GLOW */
+.mountain-logo-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(212, 165, 116, 0.25) 0%, transparent 60%),
+        radial-gradient(circle at 70% 85%, rgba(168, 181, 162, 0.22) 0%, transparent 65%),
+        linear-gradient(to bottom, rgba(255,255,255,0.03), transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Floating Fog Layer */
+.mountain-logo-section::after {
+    content: "";
+    position: absolute;
+    bottom: -10%;
+    width: 160%;
+    height: 60%;
+    left: -30%;
+    background: radial-gradient(circle at 50% 80%, rgba(255,255,255,0.15), transparent 70%);
+    filter: blur(60px) brightness(1.2);
+    animation: fogFloat 12s ease-in-out infinite alternate;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes fogFloat {
+    0% { transform: translateY(20px) scale(1); opacity: 0.25; }
+    100% { transform: translateY(-20px) scale(1.05); opacity: 0.45; }
+}
+
+/* ---------------------------------------- */
+/* 3D LOGO */
+.logo-3d-container {
+    position: relative;
+    z-index: 5;
+    perspective: 1200px;
+}
+
+/* Enhanced 3D container smoothness */
+.logo-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), filter 0.4s;
+    cursor: grab;
+}
+
+/* Main Title */
+.logo-3d h1 {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 0;
+    text-align: center;
+    color: transparent;
+
+    /* Upgraded golden snow-metal texture */
+    background: linear-gradient(135deg,
+        #FFFFFF 0%,
+        #EFE7DB 25%,
+        #E3C9A1 50%,
+        var(--himalay-accent) 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    transform: translateZ(100px) rotateX(12deg);
+}
+
+/* ------------------------------ */
+/* 3D SHADOW LAYERS */
+.logo-3d::before,
+.logo-3d::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+    pointer-events: none;
+}
+
+.logo-3d::before {
+    color: rgba(45, 80, 22, 0.75);
+    transform: translateZ(50px) rotateX(6deg);
+    filter: blur(1px);
+}
+
+.logo-3d::after {
+    color: rgba(0, 0, 0, 0.45);
+    transform: translateZ(0px) rotateX(0deg);
+    filter: blur(3px);
+}
+
+/* --------------------------------------- */
+/* Enhanced Rise Animation */
+/* --- CINEMATIC POWERFUL RISE --- */
+.logo-3d.animate {
+    animation: himalayCinematicRise 2.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes himalayCinematicRise {
+    0% {
+        opacity: 0;
+        transform: translateY(200px)
+                   translateZ(-200px)
+                   rotateX(45deg)
+                   scale(0.4);
+        filter: blur(25px) brightness(0.4);
     }
-    to {
-      opacity: 1;
-      transform: none;
+
+    45% {
+        opacity: 0.8;
+        transform: translateY(-20px)
+                   translateZ(60px)
+                   rotateX(15deg)
+                   scale(1.08);
+        filter: blur(6px) brightness(1.1);
     }
-  }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+                   translateZ(100px)
+                   rotateX(10deg)
+                   scale(1);
+        filter: blur(0) brightness(1);
+    }
+}
+
+/* ---------------------------------------- */
+/* Hover Ice Shine */
+.logo-3d:hover {
+    transform: translateZ(130px) rotateX(6deg) rotateY(6deg) scale(1.03);
+    filter: drop-shadow(0 0 20px var(--himalay-ice-glow));
+}
+
+/* Click Grip */
+.logo-3d:active {
+    cursor: grabbing;
+}
+
+/* ---------------------------------------- */
+/* Glow Pulse Under Logo */
+.logo-glow {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 240px;
+
+    background: radial-gradient(circle,
+        var(--himalay-glow) 0%,
+        rgba(212, 165, 116, 0.10) 50%,
+        transparent 80%);
+
+    filter: blur(25px);
+    animation: glowPulseEnhanced 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes glowPulseEnhanced {
+    0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.45; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+/* ---------------------------------------- */
+/* Subtitle */
+.logo-subtitle {
+    margin-top: 2.2rem;
+    font-size: clamp(1.2rem, 3vw, 1.9rem);
+    color: rgba(248, 249, 250, 0.96);
+    font-weight: 300;
+    text-align: center;
+    opacity: 0;
+    letter-spacing: 0.06em;
+
+    text-shadow: 0 0 18px rgba(255,255,255,0.25);
+
+    animation: fadeInUp 1.2s ease-out 2.8s forwards;
 }
 
 </style>
+
 </head>
 <body>
 
-<nav>
-  <div class="logo"><div class="badge">G</div><h3 style="margin:0;color:#007bff">GlassNav</h3></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himalay Darshan 3D Logo</title>
 
-  <div class="links" id="primary-navigation" role="menu">
-    <a href="#" role="menuitem">Home</a>
-    <a href="#" role="menuitem">Upload</a>
-    <a href="#" role="menuitem">Feed</a>
-    <a href="#" role="menuitem">Settings</a>
-  </div>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
-  <div class="user-area">
-    <span>Hello, user</span>
-    <button>Login</button>
-  </div>
+<style>
+/* ⛰️ ———— YOUR ENHANCED CSS (paste the full improved CSS here) ———— */
+</style>
 
-  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation" type="button">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+</head>
+<body>
 
-<main style="padding:24px;">
-  <h1>Content area</h1>
-  <p>Resize to test mobile hamburger behavior.</p>
-</main>
+<!-- HIMALAY 3D SECTION -->
+<section class="mountain-logo-section">
+
+    <!-- Glow behind logo -->
+    <div class="logo-glow"></div>
+
+    <!-- 3D LOGO -->
+    <div class="logo-3d-container">
+        <div class="logo-3d" id="himalayLogo" data-text="HIMALAY DARSHAN">
+            <h1>HIMALAY DARSHAN</h1>
+        </div>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="logo-subtitle">Social Service Foundation</p>
+
+</section>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.querySelector('nav');
-  const links = document.getElementById('primary-navigation');
+/* 🌄 Trigger rise animation when page loads */
+window.addEventListener("load", () => {
+    document.getElementById("himalayLogo").classList.add("animate");
+});
 
-  if (!hamburger || !nav || !links) {
-    console.error('Missing element: ', {hamburger: !!hamburger, nav: !!nav, links: !!links});
-    return;
-  }
+/* 🧊 Interactive mouse tilt */
+const logo = document.getElementById("himalayLogo");
+document.addEventListener("mousemove", (e) => {
+    const x = (window.innerWidth / 2 - e.clientX) / 40;
+    const y = (window.innerHeight / 2 - e.clientY) / 40;
+    logo.style.transform = `
+        translateZ(120px)
+        rotateX(${y}deg)
+        rotateY(${-x}deg)
+    `;
+});
 
-  function openMenu() {
-    nav.classList.add('expanded');
-    hamburger.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    // trap focus or other logic could go here
-  }
-  function closeMenu() {
-    nav.classList.remove('expanded');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (nav.classList.contains('expanded')) closeMenu(); else openMenu();
-  });
-
-  // Close when clicking outside the nav (only when mobile menu is open)
-  document.addEventListener('click', (e) => {
-    if (!nav.classList.contains('expanded')) return;
-    if (!nav.contains(e.target)) closeMenu();
-  });
-
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('expanded')) closeMenu();
-  });
-
-  // Optional: close menu when a link inside is clicked (common mobile behavior)
-  links.addEventListener('click', (e) => {
-    if (e.target.closest('a')) closeMenu();
-  });
+/* Reset tilt when mouse leaves */
+document.addEventListener("mouseleave", () => {
+    logo.style.transform = "translateZ(100px) rotateX(12deg)";
 });
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
