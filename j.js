@@ -313,84 +313,93 @@ document.querySelectorAll(".user").forEach(user => {
 
 });
 
-const card = document.getElementById("about-card");
-const section = document.getElementById("about");
-
-function updateScrollAnimation() {
-  const rect = section.getBoundingClientRect();
-  const viewportHeight = window.innerHeight;
-
-  // MOBILE FIX: Increase range for small screens
-  const mobile = window.innerWidth <= 768;
-
-  // Detect how much of the section is visible
-  let progress = 0;
-
-  if (rect.top < viewportHeight && rect.bottom > 0) {
-    const visible = Math.min(viewportHeight, rect.bottom) - Math.max(0, rect.top);
-    const total = Math.min(rect.height, viewportHeight);
-
-    progress = visible / total;
-  }
-
-  // Clamp 0–1
-  progress = Math.max(0, Math.min(1, progress));
-
-  // Animation values — tuned for mobile
-  const rotateX = mobile
-    ? 15 * (1 - progress)   // smoother 15° → 0°
-    : 20 * (1 - progress);  // desktop 20° → 0°
-
-  const scale = mobile
-    ? 0.85 + progress * 0.10   // 0.85 → 0.95 on mobile (better readability)
-    : 1.05 - progress * 0.05;  // desktop 1.05 → 1
-
-  const translateY = mobile
-    ? -10 * progress           // -10px max on mobile
-    : -30 * progress;          // -30px on desktop
-
-  card.style.transform = `
-    translateY(${translateY}px)
-    scale(${scale})
-    rotateX(${rotateX}deg)
-  `;
-}
-
-// Smooth handling
-window.addEventListener("scroll", updateScrollAnimation);
-window.addEventListener("resize", updateScrollAnimation);
-updateScrollAnimation();
 
 
 
 const track = document.querySelector('.events-track');
 const carousel = document.querySelector('.events-carousel');
-let scrollSpeed = 1; // pixels per frame
-let autoScroll;
 
+let scrollSpeed = 0.5;
+let autoScroll;
+let userScrolling = false;
+let isPaused = false;
+
+// --- Smooth Auto Scroll ---
 function startAutoScroll() {
-  autoScroll = requestAnimationFrame(step);
+  if (!userScrolling && !isPaused) {
+    autoScroll = requestAnimationFrame(step);
+  }
 }
 
 function step() {
+  if (userScrolling || isPaused) return;
+
   carousel.scrollLeft += scrollSpeed;
 
-  // Reset scroll for infinite effect
-  if (carousel.scrollLeft >= track.scrollWidth / 2) {
-    carousel.scrollLeft = 0;
+  // FIX: prevent first-card-cut (reset slightly > 0 to avoid scroll-snap bug)
+  if (carousel.scrollLeft >= (track.scrollWidth / 2)) {
+    carousel.scrollLeft = 1;  // <-- FIXED (not 0)
   }
 
   autoScroll = requestAnimationFrame(step);
 }
 
-// Stop auto-scroll when user interacts
-carousel.addEventListener('mouseenter', () => cancelAnimationFrame(autoScroll));
-carousel.addEventListener('mouseleave', startAutoScroll);
-carousel.addEventListener('mousedown', () => cancelAnimationFrame(autoScroll));
-carousel.addEventListener('mouseup', startAutoScroll);
+// --- User Scroll Detection ---
+function handleScroll() {
+  userScrolling = true;
+  cancelAnimationFrame(autoScroll);
 
-// Initialize
+  clearTimeout(window.resumeTimer);
+  window.resumeTimer = setTimeout(() => {
+    userScrolling = false;
+    startAutoScroll();
+  }, 1500);
+}
+
+// Events
+carousel.addEventListener('scroll', handleScroll);
+
+carousel.addEventListener('mouseenter', () => {
+  isPaused = true;
+  cancelAnimationFrame(autoScroll);
+});
+
+carousel.addEventListener('mouseleave', () => {
+  isPaused = false;
+  startAutoScroll();
+});
+
+carousel.addEventListener('mousedown', () => {
+  isPaused = true;
+  cancelAnimationFrame(autoScroll);
+});
+
+carousel.addEventListener('mouseup', () => {
+  isPaused = false;
+  startAutoScroll();
+});
+
+carousel.addEventListener('touchstart', () => {
+  isPaused = true;
+  cancelAnimationFrame(autoScroll);
+});
+
+carousel.addEventListener('touchend', () => {
+  isPaused = false;
+  startAutoScroll();
+});
+
+// Disable CSS animation
+track.style.animation = 'none';
+
+// Start Auto Scroll
 startAutoScroll();
+
+// Clean exit
+window.addEventListener('beforeunload', () => {
+  cancelAnimationFrame(autoScroll);
+});
+
 
 
 const modal = document.getElementById("team-modal");
