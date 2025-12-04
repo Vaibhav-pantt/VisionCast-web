@@ -945,29 +945,38 @@ nav.expanded .links a:hover {
 }
 
 @media (max-width: 768px) {
-  .events-section { padding: 3rem 1rem; }
-  .section-title { font-size: 2.2rem; }
-  .events-track { 
-    gap: 1.2rem;
-    animation-duration: 15s;
+  .events-section { 
+    padding: 3rem 1rem; 
   }
-  .event-card { 
+  .section-title { 
+    font-size: 2.2rem; 
+  }
+  .event-card {   /* fixed typo */
     flex: 0 0 240px;
     padding: 1rem;
   }
-  .event-card img { height: 140px; }
-  .event-card h3 { font-size: 1.3rem; }
+  .event-card img { 
+    height: 140px; 
+  }
+  .event-card h3 { 
+    font-size: 1.3rem; 
+  }
+  .events-carousel {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    -ms-overflow-style: none;  /* hide scrollbar IE */
+    scrollbar-width: none;     /* hide scrollbar Firefox */
+  }
+  .events-track { 
+    gap: 1.4rem; 
+  }
 }
 
-/* MOBILE SWIPE OPTIMIZATION */
-.events-carousel {
-  -ms-overflow-style: none;  /* hide scrollbar IE */
-  scrollbar-width: none;     /* hide scrollbar Firefox */
-}
-
+/* Hide scrollbar for Chrome/Safari */
 .events-carousel::-webkit-scrollbar {
-  display: none;             /* hide scrollbar Chrome/Safari */
+  display: none;             
 }
+
 
 
 /* Profile section with background image */
