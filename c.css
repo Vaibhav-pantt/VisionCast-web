@@ -769,6 +769,7 @@ nav.expanded .links a:hover {
 
 
 
+
 .events-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #0f241a 0%, #1a3a2e 100%);
@@ -813,35 +814,34 @@ nav.expanded .links a:hover {
 }
 
 .events-carousel {
-  overflow-x: auto;          /* allow horizontal scroll */
+  overflow-x: auto;
   overflow-y: hidden;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-  scroll-behavior: smooth;   /* smooth manual scrolling */
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 2rem; /* added to show first card fully */
+  padding-right: 2rem; /* optional for symmetry */
 }
 
-.events-carousel { 
-
-   overflow-x: auto;  
-   position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-     border-radius: 20px; 
-    } 
-.events-track { display: flex; 
+.events-track {
+  display: flex;
   gap: 1.8rem;
-   animation: scrollLeft 20s linear infinite;
-    padding: 2rem 0;
-     will-change: transform;
-     }
+  padding: 2rem 0;
+  will-change: transform;
+  animation: scrollLeft 20s linear infinite;
+  /* Remove left padding from track; carousel padding handles spacing */
+}
+
+
 .event-card {
-  flex: 0 0 220px;                  /* reduced from 260px */
+  flex: 0 0 220px;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,217,102,0.3);
-  border-radius: 16px;              /* slightly smaller corners */
-  backdrop-filter: blur(18px);      /* slightly less blur */
-  padding: 1.2rem 1rem;             /* reduced padding */
+  border-radius: 16px;
+  backdrop-filter: blur(18px);
+  padding: 1.2rem 1rem;
   text-align: center;
   position: relative;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -920,15 +920,9 @@ nav.expanded .links a:hover {
 }
 
 @keyframes scrollLeft {
-  0% { 
-    transform: translateX(0); 
-  }
-  99.9% { 
-    transform: translateX(-50%); 
-  }
-  100% { 
-    transform: translateX(0); 
-  }
+  0% { transform: translateX(0); }
+  99.9% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes shimmer {
@@ -936,38 +930,43 @@ nav.expanded .links a:hover {
   50% { opacity: 1; }
 }
 
+/* Pause animation on hover */
 .events-carousel:hover .events-track {
   animation-play-state: paused;
 }
 
 /* RESPONSIVE */
+@media (max-width: 1024px) {
+  .events-track {
+    gap: 1.5rem;
+  }
+  .event-card { flex: 0 0 200px; }
+  .event-card img { height: 150px; }
+}
+
 @media (max-width: 768px) {
   .events-section { padding: 3rem 1rem; }
   .section-title { font-size: 2.2rem; }
-  .event-card { 
-    flex: 0 0 240px;
-    padding: 1.2rem 1rem; 
-  }
   .events-track { 
     gap: 1.2rem;
     animation-duration: 15s;
+  }
+  .event-card { 
+    flex: 0 0 240px;
+    padding: 1rem;
   }
   .event-card img { height: 140px; }
   .event-card h3 { font-size: 1.3rem; }
 }
 
-@media (max-width: 480px) {
-  .event-card { 
-    flex: 0 0 220px;
-  }
-  .section-title { font-size: 1.9rem; }
-  .events-track { 
-    gap: 1rem;
-    animation-duration: 20s;
-  }
-  .event-card img { height: 130px; }
-  .event-card h3 { font-size: 1.2rem; }
-  .event-card { padding: 1rem 0.9rem; }
+/* MOBILE SWIPE OPTIMIZATION */
+.events-carousel {
+  -ms-overflow-style: none;  /* hide scrollbar IE */
+  scrollbar-width: none;     /* hide scrollbar Firefox */
+}
+
+.events-carousel::-webkit-scrollbar {
+  display: none;             /* hide scrollbar Chrome/Safari */
 }
 
 
