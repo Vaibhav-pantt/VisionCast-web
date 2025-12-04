@@ -242,18 +242,11 @@ const translations = {
         en: "Founder of",
         hi: "संस्थापक"
     },
-    "org-info": {
-        en: "HIMALAYA DARSHAN",
-        hi: "हिमालय दर्शन सामाजिक सेवा संस्थान"
-    },
-    "org-subtitle": {
-        en: "social service organization",
-        hi: "सामाजिक सेवा संस्थान"
-    },
+   
   // SECTION TITLE
   "meet-minds-title": { 
     en: "Meet the Minds Behind HIMALAYA DARSHAN<br>social service organization", 
-    hi: "हिमालय दर्शन<br>सामाजिक सेवा संस्थान के पीछे की टीम" 
+    hi: "हिमालय दर्शन<br>सामाजिक सेवा संस्थान  के प्रेरक लोग" 
   },
 
   // TEAM MEMBERS
@@ -261,9 +254,9 @@ const translations = {
   "muna-role": { en: "Founder & CEO", hi: "संस्थापक एवं मुख्य कार्यकारी अधिकारी" },
 
   "mukul-name": { en: "MUKUL PANT", hi: "मुकुल पंत" },
-  "mukul-role": { en: "Project Coordinator", hi: "परियोजना समन्वयक" },
+  "mukul-role": { en: "Project Coordinator", hi: "सचिव" },
 
-  "riya-name": { en: "RIYA SHARMA", hi: "रिया शर्मा" },
+  "riya-name": { en: "RIYA SHARMA", hi: "पूजा पांडे " },
   "riya-role": { en: "Content Specialist", hi: "सामग्री विशेषज्ञ" },
 
   // BRAND
@@ -408,25 +401,25 @@ function openModal(data) {
 const teamMembers = {
   1: {
     img: "OIP (2).jpeg",
-    fullname: "Mr. Muna Joshi",
-    role: "Founder & CEO",
-    email: "muna.joshi@example.com",
-    phone: "+91 99999 00001",
+    fullname: "Mr. vipin chnadr pandey",
+    role: "Founder ",
+    email: "vipinchandra@gmail.com",
+    phone: "+91 ",
     location: "Rishikesh, Uttarakhand",
-    education: "Master's in Social Work (MSW)",
+    education: "Bachelor of Arts in Social Science (BA)",
     facebook: "#",
     instagram: "#",
     linkedin: "https://linkedin.com/in/munajoshi",
-    bio: "A visionary leader dedicated to social upliftment and women empowerment."
+    bio: " Ex- central reserve police force."
   },
   2: {
     img: "OIP (2).jpeg",
     fullname: "Mr. Mukul Pant",
-    role: "Project Coordinator",
+    role: " Secretary ",
     email: "mukul.pant@example.com",
     phone: "+91 99999 00002",
     location: "Dehradun, Uttarakhand",
-    education: "Bachelor's in Project Management",
+    education: "Master of Science (Msc)",
     facebook: "#",
     instagram: "#",
     linkedin: "https://linkedin.com/in/mukulpant",
@@ -434,16 +427,16 @@ const teamMembers = {
   },
   3: {
     img: "OIP (2).jpeg",
-    fullname: "Ms. Riya Sharma",
-    role: "Content Specialist",
-    email: "riya.sharma@example.com",
+    fullname: "Mrs. pooja pandey ",
+    role: "CA",
+    email: "",
     phone: "+91 99999 00003",
     location: "Haridwar, Uttarakhand",
     education: "BA in Mass Communication",
     facebook: "#",
     instagram: "#",
     linkedin: "https://linkedin.com/in/riyasharma",
-    bio: "Creates creative and educational content for community awareness."
+    bio: "Good in math."
   }
 };
 
