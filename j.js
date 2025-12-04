@@ -180,13 +180,13 @@ const translations = {
   // Hero
   "logo-3d-title": { en: "HIMALAY DARSHAN", hi: "हिमालय दर्शन" },
   "subtitle": { en: "Social Service Organization", hi: "सामाजिक सेवा संस्थान" },
-  "logo-subtitle": { en: "Strength • Resilience • Hope", hi: "शक्ति • सहनशीलता • आशा" },
+  "logo-subtitle": { en: "Strength • Resilience • Hope", hi: "सेवा • समर्पण• आशा" },
 
   // About
-  "about-title": { en: "About Himalay Darshan", hi: "हिमालय दर्शन के बारे में" },
+  "about-title": { en: "About Himalay Darshan", hi: "हिमालय दर्शन सामाजिक सेवा संस्थान " },
   "about-p1": { 
     en: "Founded in 2019, Himalay Darshan is dedicated to addressing discrimination, social challenges, and human welfare issues.",
-    hi: "2019 में स्थापित, हिमालय दर्शन भेदभाव, सामाजिक चुनौतियों और मानव कल्याण मुद्दों को हल करने के लिए समर्पित है।" 
+    hi: "30 सितंबर 2025 को स्थापित हिमालय दर्शन सामाजिक सेवा संस्थान समाज में भारतीय संस्कृति, मानव मूल्य, स्वास्थ्य,शिक्षा, गरीब महिला एवं बच्चों के सर्वांगीण विकास एवं पर्यावरण संरक्षण मृदा संरक्षण एवं प्राकृतिक एवं मानव जनित आपदा से संबंधित जानकारी एवं बचाव राहत कार्य करने तथा सकारात्मक पहलू और सार्थक कार्यक्रमों के माध्यम से जीवन में बदलाव लाने सामाजिक चुनौतियों का सामना करने और मानव कल्याण को बढ़ावा देने के लिए प्रेरित / कार्य करता है"
   },
   "about-p2": { 
     en: "Guided by integrity and inspired by the enduring strength of the Himalayas, we provide structured support, awareness programs, and empowerment resources for individuals facing social inequities and personal struggles.",
@@ -276,8 +276,233 @@ document.getElementById("langBtn").addEventListener("click", () => {
   }
 });
 
+document.querySelectorAll(".user").forEach(user => {
+
+  user.addEventListener("mouseenter", () => {
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    tooltip.innerHTML = `<strong>${user.dataset.name}</strong><br>${user.dataset.role}`;
+    document.body.appendChild(tooltip);
+    user._tooltip = tooltip;
+  });
+
+  user.addEventListener("mousemove", (e) => {
+    const tooltip = user._tooltip;
+    if (!tooltip) return;
+
+    // Smooth mouse follow 
+    const x = e.pageX;
+    const y = e.pageY - 60;
+
+    tooltip.style.left = x + "px";
+    tooltip.style.top = y + "px";
+    
+    tooltip.style.opacity = 1;
+    tooltip.style.transform = "translateY(0px) scale(1) rotateX(0deg)";
+  });
+
+  user.addEventListener("mouseleave", () => {
+    const tooltip = user._tooltip;
+    if (!tooltip) return;
+
+    tooltip.style.opacity = 0;
+    tooltip.style.transform = "translateY(12px) scale(0.85) rotateX(25deg)";
+    
+    setTimeout(() => tooltip.remove(), 300);
+  });
+
+});
+
+const card = document.getElementById("about-card");
+const section = document.getElementById("about");
+
+function updateScrollAnimation() {
+  const rect = section.getBoundingClientRect();
+  const viewportHeight = window.innerHeight;
+
+  // MOBILE FIX: Increase range for small screens
+  const mobile = window.innerWidth <= 768;
+
+  // Detect how much of the section is visible
+  let progress = 0;
+
+  if (rect.top < viewportHeight && rect.bottom > 0) {
+    const visible = Math.min(viewportHeight, rect.bottom) - Math.max(0, rect.top);
+    const total = Math.min(rect.height, viewportHeight);
+
+    progress = visible / total;
+  }
+
+  // Clamp 0–1
+  progress = Math.max(0, Math.min(1, progress));
+
+  // Animation values — tuned for mobile
+  const rotateX = mobile
+    ? 15 * (1 - progress)   // smoother 15° → 0°
+    : 20 * (1 - progress);  // desktop 20° → 0°
+
+  const scale = mobile
+    ? 0.85 + progress * 0.10   // 0.85 → 0.95 on mobile (better readability)
+    : 1.05 - progress * 0.05;  // desktop 1.05 → 1
+
+  const translateY = mobile
+    ? -10 * progress           // -10px max on mobile
+    : -30 * progress;          // -30px on desktop
+
+  card.style.transform = `
+    translateY(${translateY}px)
+    scale(${scale})
+    rotateX(${rotateX}deg)
+  `;
+}
+
+// Smooth handling
+window.addEventListener("scroll", updateScrollAnimation);
+window.addEventListener("resize", updateScrollAnimation);
+updateScrollAnimation();
 
 
+
+const track = document.querySelector('.events-track');
+const carousel = document.querySelector('.events-carousel');
+let scrollSpeed = 1; // pixels per frame
+let autoScroll;
+
+function startAutoScroll() {
+  autoScroll = requestAnimationFrame(step);
+}
+
+function step() {
+  carousel.scrollLeft += scrollSpeed;
+
+  // Reset scroll for infinite effect
+  if (carousel.scrollLeft >= track.scrollWidth / 2) {
+    carousel.scrollLeft = 0;
+  }
+
+  autoScroll = requestAnimationFrame(step);
+}
+
+// Stop auto-scroll when user interacts
+carousel.addEventListener('mouseenter', () => cancelAnimationFrame(autoScroll));
+carousel.addEventListener('mouseleave', startAutoScroll);
+carousel.addEventListener('mousedown', () => cancelAnimationFrame(autoScroll));
+carousel.addEventListener('mouseup', startAutoScroll);
+
+// Initialize
+startAutoScroll();
+
+
+const modal = document.getElementById("team-modal");
+const closeBtn = document.querySelector(".close-modal");
+
+function openModal(data) {
+  // LEFT SIDE
+  const imgEl = document.getElementById("modal-img");
+  if (data.img) imgEl.src = data.img;
+  else imgEl.removeAttribute('src');
+
+  // social links (defensive)
+  const fb = document.getElementById("modal-facebook");
+  const ig = document.getElementById("modal-instagram");
+  const li = document.getElementById("modal-linkedin");
+  if (fb) fb.href = data.facebook || "#";
+  if (ig) ig.href = data.instagram || "#";
+  if (li) li.href = data.linkedin || "#";
+
+  // RIGHT SIDE (name fallback to fullname)
+  document.getElementById("modal-name").textContent = data.name || data.fullname || "";
+  document.getElementById("modal-fullname").textContent = data.fullname || "";
+  document.getElementById("modal-role").textContent = data.role || "";
+
+  document.getElementById("modal-email").textContent = data.email || "";
+  document.getElementById("modal-phone").textContent = data.phone || "";
+  document.getElementById("modal-location").textContent = data.location || "";
+  document.getElementById("modal-education").textContent = data.education || "";
+
+  // BIO (typewriter — simple restart by toggling class)
+  const bio = document.getElementById("modal-bio");
+  bio.textContent = data.bio || "";
+  // restart CSS typewriter if present
+  bio.classList.remove("typewriter");
+  void bio.offsetWidth;
+  bio.classList.add("typewriter");
+
+  // show modal (use flex-like centering)
+  modal.style.display = "flex";
+  modal.style.alignItems = "center";
+  modal.style.justifyContent = "center";
+}
+
+/* TEAM DATA */
+const teamMembers = {
+  1: {
+    img: "OIP (2).jpeg",
+    fullname: "Mr. Muna Joshi",
+    role: "Founder & CEO",
+    email: "muna.joshi@example.com",
+    phone: "+91 99999 00001",
+    location: "Rishikesh, Uttarakhand",
+    education: "Master's in Social Work (MSW)",
+    facebook: "#",
+    instagram: "#",
+    linkedin: "https://linkedin.com/in/munajoshi",
+    bio: "A visionary leader dedicated to social upliftment and women empowerment."
+  },
+  2: {
+    img: "OIP (2).jpeg",
+    fullname: "Mr. Mukul Pant",
+    role: "Project Coordinator",
+    email: "mukul.pant@example.com",
+    phone: "+91 99999 00002",
+    location: "Dehradun, Uttarakhand",
+    education: "Bachelor's in Project Management",
+    facebook: "#",
+    instagram: "#",
+    linkedin: "https://linkedin.com/in/mukulpant",
+    bio: "Manages on-ground projects ensuring smooth execution and maximum impact."
+  },
+  3: {
+    img: "OIP (2).jpeg",
+    fullname: "Ms. Riya Sharma",
+    role: "Content Specialist",
+    email: "riya.sharma@example.com",
+    phone: "+91 99999 00003",
+    location: "Haridwar, Uttarakhand",
+    education: "BA in Mass Communication",
+    facebook: "#",
+    instagram: "#",
+    linkedin: "https://linkedin.com/in/riyasharma",
+    bio: "Creates creative and educational content for community awareness."
+  }
+};
+
+/* Open modal on card click */
+document.querySelectorAll(".team-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.getAttribute("data-member");
+    if (teamMembers[id]) openModal(teamMembers[id]);
+  });
+});
+
+/* Close modal */
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+/* Close when clicking outside content */
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+/* keyboard esc to close */
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal.style.display = "none";
+  }
+});
 
 
 

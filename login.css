@@ -106,3 +106,93 @@ body{
 .register-link p a:hover{
   text-decoration: underline;
 }
+
+
+
+
+
+
+/* About Section */
+
+
+/* ABOUT SECTION - REFINED ELEGANCE */
+/* 🌄 SIMPLE CLASSIC ABOUT SECTION - MINIMALIST DESIGN */
+.about-glass {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.about-content {
+    max-width: 800px;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(168, 181, 162, 0.2);
+}
+
+.about-content h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: #2D5016;
+    margin: 0 0 2.5rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+}
+
+
+.about-content h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #D4A574;
+    margin: 1rem auto 0;
+    border-radius: 1px;
+}
+
+.about-content p {
+    font-size: 1.15rem;
+    color: #1A2A1E;
+    line-height: 1.75;
+    margin: 0 0 1.75rem 0;
+    font-weight: 300;
+}
+
+.about-content p:last-of-type {
+    font-style: italic;
+    color: #2D5016;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .about-glass {
+        min-height: 95vh;
+        padding: 3rem 1.5rem;
+    }
+    
+    .about-content {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    
+    .about-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-content {
+        padding: 2rem 1.25rem;
+    }
+}
