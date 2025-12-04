@@ -221,7 +221,7 @@ const translations = {
   "product-text": { 
     en: "DEAR ME<br>Sacred Secret<br>ILLUMINATING SAFFRON SERUM", 
     hi: "डियर मी<br>पवित्र रहस्य<br>प्रकाशमान केसर सीरम"
-  },   "uploaded-title": { en: "Uploaded by Admin", hi: "एडमिन द्वारा अपलोड किया गया" },
+  },   "uploaded-title": { en: "Uploaded by Admin", hi: "हिमालय दर्शन सामाजिक सेवा संस्थान द्वारा अपलोड किया गया" },
     "uploaded-description": { 
         en: "All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for content.", 
         hi: "सभी वीडियो  हिमालय दर्शन एडमिन टीम द्वारा सत्यापित और अपलोड किए जाते हैं — आपका विश्वसनीय स्रोत।" 
@@ -249,8 +249,54 @@ const translations = {
     "org-subtitle": {
         en: "social service organization",
         hi: "सामाजिक सेवा संस्थान"
-    }
+    },
+  // SECTION TITLE
+  "meet-minds-title": { 
+    en: "Meet the Minds Behind HIMALAYA DARSHAN<br>social service organization", 
+    hi: "हिमालय दर्शन<br>सामाजिक सेवा संस्थान के पीछे की टीम" 
+  },
+
+  // TEAM MEMBERS
+  "muna-name": { en: "MUNA JOSHI", hi: "मुना जोशी" },
+  "muna-role": { en: "Founder & CEO", hi: "संस्थापक एवं मुख्य कार्यकारी अधिकारी" },
+
+  "mukul-name": { en: "MUKUL PANT", hi: "मुकुल पंत" },
+  "mukul-role": { en: "Project Coordinator", hi: "परियोजना समन्वयक" },
+
+  "riya-name": { en: "RIYA SHARMA", hi: "रिया शर्मा" },
+  "riya-role": { en: "Content Specialist", hi: "सामग्री विशेषज्ञ" },
+
+  // BRAND
+  "brand-heading": { en: "HIMALAYA DARSHAN", hi: "हिमालय दर्शन" },
+  "brand-tagline": { 
+    en: "Serving humanity with hope, help & harmony", 
+    hi: "मानवता की सेवा — आशा, सहायता और सौहार्द के साथ" 
+  },
+
+
+  // QUICK LINKS
+  "quick-links-title": { en: "Quick Links", hi: "त्वरित लिंक" },
+
+  "link-dashboard": { en: "Dashboard", hi: "डैशबोर्ड" },
+  "link-feed": { en: "Feed", hi: "फ़ीड" },
+  "link-upload": { en: "Upload", hi: "अपलोड" },
+  "link-settings": { en: "Settings", hi: "सेटिंग्स" },
+
+  // SUPPORT SECTION
+  "support-title": { en: "Support", hi: "सहायता" },
+
+  "support-himseva": { en: "HimSeva", hi: "हिमसेवा" },
+  "support-report": { en: "Report an Issue", hi: "समस्या दर्ज करें" },
+  "support-helpcenter": { en: "Help Center", hi: "सहायता केंद्र" },
+
+  // COPYRIGHT
+  "copyright-text": { 
+    en: "© 2025 Himalaya Darshan. All rights reserved ❤️ by our dedicated team.",
+    hi: "© 2025 हिमालय दर्शन। सभी अधिकार सुरक्षित ❤️ हमारी समर्पित टीम द्वारा।" 
+  },
+
 };
+
 
 
 
@@ -314,91 +360,6 @@ document.querySelectorAll(".user").forEach(user => {
 });
 
 
-
-
-const track = document.querySelector('.events-track');
-const carousel = document.querySelector('.events-carousel');
-
-let scrollSpeed = 0.5;
-let autoScroll;
-let userScrolling = false;
-let isPaused = false;
-
-// --- Smooth Auto Scroll ---
-function startAutoScroll() {
-  if (!userScrolling && !isPaused) {
-    autoScroll = requestAnimationFrame(step);
-  }
-}
-
-function step() {
-  if (userScrolling || isPaused) return;
-
-  carousel.scrollLeft += scrollSpeed;
-
-  // FIX: prevent first-card-cut (reset slightly > 0 to avoid scroll-snap bug)
-  if (carousel.scrollLeft >= (track.scrollWidth / 2)) {
-    carousel.scrollLeft = 1;  // <-- FIXED (not 0)
-  }
-
-  autoScroll = requestAnimationFrame(step);
-}
-
-// --- User Scroll Detection ---
-function handleScroll() {
-  userScrolling = true;
-  cancelAnimationFrame(autoScroll);
-
-  clearTimeout(window.resumeTimer);
-  window.resumeTimer = setTimeout(() => {
-    userScrolling = false;
-    startAutoScroll();
-  }, 1500);
-}
-
-// Events
-carousel.addEventListener('scroll', handleScroll);
-
-carousel.addEventListener('mouseenter', () => {
-  isPaused = true;
-  cancelAnimationFrame(autoScroll);
-});
-
-carousel.addEventListener('mouseleave', () => {
-  isPaused = false;
-  startAutoScroll();
-});
-
-carousel.addEventListener('mousedown', () => {
-  isPaused = true;
-  cancelAnimationFrame(autoScroll);
-});
-
-carousel.addEventListener('mouseup', () => {
-  isPaused = false;
-  startAutoScroll();
-});
-
-carousel.addEventListener('touchstart', () => {
-  isPaused = true;
-  cancelAnimationFrame(autoScroll);
-});
-
-carousel.addEventListener('touchend', () => {
-  isPaused = false;
-  startAutoScroll();
-});
-
-// Disable CSS animation
-track.style.animation = 'none';
-
-// Start Auto Scroll
-startAutoScroll();
-
-// Clean exit
-window.addEventListener('beforeunload', () => {
-  cancelAnimationFrame(autoScroll);
-});
 
 
 

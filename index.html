@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>User Dashboard </title>
+  <title>HimSeva</title>
   <link rel="stylesheet" href="c.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 
 <nav>
   <div class="logo">
-    <div class="badge">VC</div>
+    <div class="badge">HS</div>
     <h3>HimSeva</h3>
   </div>
 <!-- Example: add inside .user-area -->
@@ -169,9 +169,10 @@
 
 
 <section id="video-section" class="video-section">
-    <h2 id="uploaded-title" class="english-text">Uploaded by Admin</h2>
+    <h2 id="uploaded-title" class="english-text">Uploaded by 
+HimSeva social service organization</h2>
     <p id="uploaded-description" class="english-text">
-        All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for content.
+        All videos are verified and uploaded by the  HIMALAYA DARSHAN social service organization Team — your trusted source for content.
     </p>
 
 
@@ -288,28 +289,28 @@
 </section>
 
 <section id="team" class="team-section">
-  <h2>Meet the Minds Behind HIMALAYA DARSHAN<br>social service organization</h2>
+  <h2 id="meet-minds-title">Meet the Minds Behind HIMALAYA DARSHAN<br>social service organization</h2>
 
 
   <div class="team-grid">
     <div class="team-card" data-member="1">
       <img src="OIP (2).jpeg" alt="Muna Joshi" class="team-img">
-      <h3>MUNA JOSHI</h3>
-      <p class="role">Founder & CEO</p>
+      <h3 id="muna-name">MUNA JOSHI</h3>
+      <p class="role" id="muna-role">Founder & CEO</p>
       
     </div>
 
     <div class="team-card" data-member="2">
       <img src="OIP (2).jpeg" alt="Mukul Pant" class="team-img">
-      <h3>MUKUL PANT</h3>
-      <p class="role">Project Coordinator</p>
+      <h3 id="mukul-name">MUKUL PANT</h3>
+      <p class="role" id="mukul-role">Project Coordinator</p>
        
     </div>
 
     <div class="team-card" data-member="3">
       <img src="OIP (2).jpeg" alt="Riya Sharma" class="team-img">
-      <h3>RIYA SHARMA</h3>
-      <p class="role">Content Specialist</p>
+      <h3 id="riya-name">RIYA SHARMA</h3>
+      <p class="role" id="riya-role">Content Specialist</p>
      
     </div>
   </div>
@@ -328,7 +329,7 @@
 
     <!-- RIGHT SIDE -->
     <div class="modal-right">
-
+      <button id="langBtn">हिंदी</button>
       <h2 id="modal-name"></h2>
 
       <p class="detail"><strong>Full Name:</strong> <span id="modal-fullname"></span></p>
@@ -348,10 +349,22 @@
 
       <!-- SOCIAL ICONS (appear below details) -->
       <div class="social-icons" style="margin-top:18px;">
-        <a id="modal-facebook" class="icon fb" href="#" target="_blank" rel="noopener noreferrer">F</a>
-        <a id="modal-instagram" class="icon ig" href="#" target="_blank" rel="noopener noreferrer">I</a>
-        <a id="modal-linkedin" class="icon li" href="#" target="_blank" rel="noopener noreferrer">in</a>
-      </div>
+          <a href="#">
+  <img src="https://th.bing.com/th/id/OIP.PEQr5yxVtpaga9-4N7q8KAHaHa?w=196&h=196&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="instagram"> Instagram
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.-keqToY_r-cD_EybDcsAqQHaHZ?w=186&h=185&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="linkedin"> LinkedIn
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.P8lwHI2z0HQ9ZSjkqIplfAHaHa?w=174&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="twitter"> Twitter
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.zOCcVTv6jKMsTbljKTNnZgHaHa?w=179&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="facebook"> Facebook
+</a>
+          </div>
 
     </div>
   </div>
@@ -363,16 +376,17 @@
   <div class="footer-overlay"></div>
 
   <div class="footer-container">
+    
     <!-- Brand Section -->
     <div class="footer-column brand">
-      <h2>Verbun</h2>
-      <p>Empowering the world through language and culture.</p>
+      <h2 id="brand-heading">HIMALAYA DARSHAN</h2>
+      <p  id="brand-tagline">Serving humanity with hope, help & harmony</p>
     </div>
 
     <!-- User Contact Details -->
     <div class="footer-column contact-info">
       <h3>User Details</h3>
-      <p><strong>Name:</strong> vaibhav pant </p>
+      <p><strong>Name:</strong> Vaibhav Pant</p>
       <p><strong>Email:</strong> johndoe@email.com</p>
       <p><strong>Phone:</strong> +91 98765 43210</p>
       <p><strong>Location:</strong> New Delhi, India</p>
@@ -380,12 +394,21 @@
 
     <!-- Quick Links -->
     <div class="footer-column quick-links">
-      <h3>Quick Links</h3>
+      <h3  id= "quick-links-title">Quick Links</h3>
       <ul>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Feed</a></li>
-        <li><a href="#">Upload</a></li>
-        <li><a href="#">Settings</a></li>
+        <li><a href="#"  id= "link-dashboard">Dashboard</a></li>
+        <li><a href="#"  id= "link-feed">Feed</a></li>
+        <li><a href="#"  id= "link-upload">Upload</a></li>
+        <li><a href="#"  id= "link-settings">Settings</a></li>
+      </ul>
+    </div>
+
+       <div class="footer-column support">
+      <h3  id= "support-title">Support</h3>
+      <ul>
+        <li><a href="#"  id= "support-himseva">HimSeva</a></li>
+        <li><a href="#"  id= "support-report">Report an Issue</a></li>
+        <li><a href="#"  id= "support-title">Help Center</a></li>
       </ul>
     </div>
 
@@ -393,29 +416,46 @@
     <div class="footer-column socials">
       <h3>Connect</h3>
       <div class="social-icons">
-        <a href="#" aria-label="Instagram">jbvgvjhb<i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn">lojiuyf6fyh<i class="fab fa-linkedin"></i></a>
-        <a href="#" aria-label="Twitter"> hvgtygu<i class="fab fa-twitter"></i></a>
+       <a href="#">
+  <img src="https://th.bing.com/th/id/OIP.PEQr5yxVtpaga9-4N7q8KAHaHa?w=196&h=196&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="instagram"> Instagram
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.-keqToY_r-cD_EybDcsAqQHaHZ?w=186&h=185&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="linkedin"> LinkedIn
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.P8lwHI2z0HQ9ZSjkqIplfAHaHa?w=174&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="twitter"> Twitter
+</a>
+
+<a href="#">
+  <img src="https://th.bing.com/th/id/OIP.zOCcVTv6jKMsTbljKTNnZgHaHa?w=179&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="facebook"> Facebook
+</a>
+
       </div>
     </div>
+
   </div>
 
   <hr />
-<!-- 🎨 Doodle Footer -->
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
-<footer class="doodle-footer">
-  <p class="copyright">
-<span id="footer-doodle-brand" class="brand">VisionCast</span>. 
-    <span id="footer-doodle-rights">All rights are reserved</span> 
-    <span class="heart" aria-label="love" role="img">❤️</span> 
-    <span id="footer-doodle-team">by the VisionCast Team</span>.
+  <!-- Doodle Footer -->
+  <div class="doodle-footer">
+    <p class="copyright"   id="copyright-text">
+      © 2025 <span class="brand">Himalaya Darshan</span>. 
+      All rights reserved 
+      <span class="heart">❤️</span> 
+      by our dedicated team.
+    </p>
 
-  <!-- squiggly underline -->
-  <svg class="squiggle" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 10 C30 0, 70 20, 100 10 S170 0, 200 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <!-- Example: add inside .user-area -->
+    <!-- squiggly underline -->
+    <svg class="squiggle" viewBox="0 0 200 20" preserveAspectRatio="none">
+      <path d="M0 10 C30 0, 70 20, 100 10 S170 0, 200 10" 
+            fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
 
 
 </footer>
