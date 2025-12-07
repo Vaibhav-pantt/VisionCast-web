@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIMSEVA Event</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #f5f7fa;
+        overflow-x: hidden;
+    }
+
+    /* ---------------- PARALLAX HEADER ---------------- */
+/* ---------------- PARALLAX HEADER ---------------- */
+.header {
+    height: 18vh;
+    background: linear-gradient(135deg, #184e77 0%, #141415 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: clamp(2rem, 2vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+    padding: 0 1rem;
+    text-align: center;
+    line-height: 1.2;
+   
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Matches slider shadow */
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2); /* Overlay for better text readability */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.header > * {
+    position: relative;
+    z-index: 2;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 3s infinite;
+    z-index: 3;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+
+    /* --------------- IMAGE SLIDER ------------------ */
+.slider-container {
+  max-width: 900px;
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  background: #000;
+}
+
+.slider {
+  position: relative;
+  height: 450px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Caption */
+.caption {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.slide.active .caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.6s ease;
+}
+
+.caption {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+
+/* Arrows */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Dots */
+.dots {
+  position: absolute;
+ bottom: 1.5px;       /* always at bottom of slider */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;        /* ensure they are above slides */
+  pointer-events: auto;
+}
+
+.dot {
+  width: 8px;   /* smaller width */
+  height: 8px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.dot.active {
+  background: #fff;
+  transform: scale(1.2); 
+}
+
+
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  .slider {
+    height: 300px;
+  }
+
+  .caption {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    bottom: 15px;
+    left: 10px;
+  }
+
+  .prev, .next {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider {
+    height: 220px;
+  }
+
+  .caption {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    bottom: 10px;
+    left: 8px;
+  }
+
+  .prev, .next {
+    font-size: 1.2rem;
+    padding: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+    /* --------------- EVENT INFO CARD ------------------ */
+    .info {
+        max-width: 900px;
+        margin: 30px auto;
+        background: rgba(255,255,255,0.3);
+        backdrop-filter: blur(12px);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .info h2 {
+        text-align: center;
+        color: #184e77;
+    }
+
+    .info p {
+        font-size: 1.05rem;
+        text-align: justify;
+        line-height: 1.7;
+        color: #222;
+    }
+
+    /* ----------------- TIMELINE ---------------------- */
+    .timeline {
+        max-width: 850px;
+        margin: 60px auto;
+        position: relative;
+        padding-left: 40px;
+        border-left: 4px solid #184e77;
+    }
+
+    .timeline-item {
+        margin-bottom: 40px;
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1s forwards;
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 5px;
+        width: 18px;
+        height: 18px;
+        background: #184e77;
+        border-radius: 50%;
+    }
+
+    .timeline-item h3 {
+        margin: 0;
+        color: #184e77;
+    }
+
+.back-btn {
+    display: block;
+    width: max-content;
+    margin: 40px auto;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #184e77 0%, #1a5a88 50%, #113952 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.02em;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(24, 78, 119, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.back-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, #113952 0%, #155072 50%, #0d2e47 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(24, 78, 119, 0.6);
+}
+
+.back-btn:hover::before {
+    left: 100%;
+}
+
+.back-btn:active {
+    transform: translateY(-1px);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PARALLAX HEADER -->
+<div class="header">
+    Community Cleanliness Drive – HIMSEVA
+</div>
+
+<!-- IMAGE SLIDER -->
+
+<div class="slider-container">
+  <div class="slider">
+    <div class="slide active">
+      <img src="OIP (1).jpeg" alt="Event 1">
+      <div class="caption">Volunteers at the cleaning drive</div>
+    </div>
+    <div class="slide">
+      <img src="OIP (2).jpeg" alt="Event 2">
+      <div class="caption">Community awareness activity</div>
+    </div>
+    <div class="slide">
+      <img src="oip3.jpg" alt="Event 3">
+      <div class="caption">Group photo after the event</div>
+    </div>
+  </div>
+
+  <!-- Navigation arrows -->
+  <span class="prev">&#10094;</span>
+  <span class="next">&#10095;</span>
+
+  <!-- Dots -->
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+
+
+<!-- EVENT DETAILS -->
+<div class="info">
+    <h2>Event Overview</h2>
+    <p>
+        HIMSEVA organized a large-scale Community Cleanliness Drive with the aim of 
+        spreading awareness about hygiene and environmental responsibility.
+        With the participation of over 60 volunteers, the event focused on 
+        cleaning public spaces, roadside areas, and educating locals about 
+        waste management and cleanliness habits.
+    </p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline">
+    <div class="timeline-item">
+        <h3>📍 9:00 AM – Event Start</h3>
+        <p>Volunteers gathered at the central ground and received instructions, 
+        safety gear, and cleaning equipment.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>🧹 11:00 AM – Cleaning Activities</h3>
+        <p>Groups moved into assigned areas to clean markets, roadsides, and public 
+        spaces while engaging with locals.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>🤝 2:00 PM – Awareness Drive</h3>
+        <p>Volunteers conducted a small awareness rally and distributed educational 
+        leaflets on hygiene and waste disposal.</p>
+    </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html#events-section" class="back-btn">&#8592; Back to Home</a>
+
+
+<script>
+
+
+    let startX = 0;
+let endX = 0;
+
+const sliderContainer = document.querySelector(".slider-container");
+
+sliderContainer.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+sliderContainer.addEventListener("touchend", e => {
+  endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) { // swipe left
+    nextSlide();
+    resetInterval();
+  } else if (endX - startX > 50) { // swipe right
+    prevSlide();
+    resetInterval();
+  }
+});
+
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+
+let current = 0;
+let slideInterval = setInterval(nextSlide, 4000);
+
+// Show current slide
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active");
+    dots[i].classList.remove("active");
+    if(i === index){
+      slide.classList.add("active");
+      dots[i].classList.add("active");
+    }
+  });
+}
+
+// Next slide
+function nextSlide() {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}
+
+// Previous slide
+function prevSlide() {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+}
+
+// Event listeners
+next.addEventListener("click", () => {
+  nextSlide();
+  resetInterval();
+});
+prev.addEventListener("click", () => {
+  prevSlide();
+  resetInterval();
+});
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    current = i;
+    showSlide(current);
+    resetInterval();
+  });
+});
+
+// Pause on hover
+document.querySelector(".slider-container").addEventListener("mouseenter", () => clearInterval(slideInterval));
+document.querySelector(".slider-container").addEventListener("mouseleave", () => slideInterval = setInterval(nextSlide, 4000));
+
+function resetInterval() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 4000);
+}
+
+
+  </script>
+</body>
+</html>
