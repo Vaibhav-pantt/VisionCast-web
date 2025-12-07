@@ -1,0 +1,24 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="100" fill="#A8B5A2"></circle>
+  
+  <!-- Mountains -->
+  <polygon points="30,150 100,40 170,150" fill="#2D5016"></polygon>
+  <polygon points="50,150 100,80 150,150" fill="#3B7023"></polygon>
+  
+  <!-- Sun behind mountains -->
+  <circle cx="100" cy="60" r="20" fill="#F8F9FA"></circle>
+  <g stroke="#F8F9FA" stroke-width="2">
+    <line x1="100" y1="20" x2="100" y2="0"></line>
+    <line x1="120" y1="40" x2="140" y2="20"></line>
+    <line x1="80" y1="40" x2="60" y2="20"></line>
+    <line x1="160" y1="100" x2="180" y2="100"></line>
+    <line x1="40" y1="100" x2="20" y2="100"></line>
+  </g>
+  
+  <!-- Heart / Hands -->
+  <path d="M100 120 C92 110, 80 110, 80 130 C80 150, 100 170, 100 170 C100 170, 120 150, 120 130 C120 110, 108 110, 100 120 Z" fill="#D4A574"></path>
+  
+  <!-- Text Below -->
+  <text x="100" y="190" font-family="Arial" font-size="20" fill="#2D5016" text-anchor="middle">HimSeva</text>
+</svg>
