@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himalay Darshan</title>
+<style>
+/* ---------------------------------
+   GLOBAL STYLES
+--------------------------------- */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  line-height: 1.6;
+}
+
+/* ------------------------------
+   ABOUT SECTION
+------------------------------- */
+.about-glass {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 35px 25px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.about-glass.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #4a4a4f;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ------------------------------
+   HERO SECTION
+------------------------------- */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 60px 25px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.hero-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.hero-title em {
+  background: linear-gradient(90deg, #7a6cff, #a38dff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 15px;
+}
+
+.explore-btn {
+  padding: 12px 30px;
+  background-color: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #333;
+}
+
+.arrow-btn {
+  padding: 12px 20px;
+  background-color: #e1e1e4;
+  color: #1d1d1f;
+  border-radius: 14px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.arrow-btn:hover {
+  background-color: #d3d3d6;
+}
+
+/* HERO IMAGE AREA */
+.hero-image-area {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.product-image {
+  width: 320px;
+  height: 420px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-text-overlay {
+  text-align: center;
+  color: #d4a77e;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-text-overlay:hover {
+  transform: translateY(-5px);
+}
+
+/* SCROLL REVEAL */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .hero-title {
+    font-size: 2.4rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .product-image {
+    width: 260px;
+    height: 360px;
+  }
+}
+
+/* Trusted Users */
+/* Container */
+.trusted-users {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+/* Avatar images */
+.trusted-users img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.9);
+    transition: transform .25s ease;
+    cursor: pointer;
+}
+
+.trusted-users img:hover {
+    transform: scale(1.08);
+}
+
+/* TOOLTIP */
+
+/* Base tooltip (no animation here) */
+.tooltip {
+    position: absolute;
+    background: rgba(10, 10, 10, 0.752);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-15px) scale(0.9);
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 999;
+    box-shadow: 0 0 12px rgba(0,255,200,0.35);
+}
+
+/* Float animation (used only when hovering) */
+@keyframes floatUpOnce {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Show + play animation once when image is hovered */
+.trusted-users img:hover + .tooltip,
+.trusted-users:hover .tooltip {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: floatUpOnce 0.35s ease-out forwards;
+}
+</style>
+</head>
+<body>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-glass" data-reveal>
+  <div class="about-content" role="article">
+    <h2>About Himalay Darshan</h2>
+    <p>
+      “Founded on September 30, 2025, Himalay Darshan Social Service Organization 
+      works to promote Indian culture, human values, health, education, and the 
+      holistic development of underprivileged women and children, while also 
+      focusing on environmental and soil conservation, disaster awareness, 
+      preparedness, and relief efforts. Through positive initiatives and 
+      meaningful programs, it inspires action, drives change, addresses social 
+      challenges, and advances human welfare.”
+    </p>
+  </div>
+</section>
+
+<!-- HERO SECTION -->
+<section class="hero-section" data-reveal>
+  <div class="hero-content">
+    <h1 class="hero-title">Latest <br><em>Updates</em></h1>
+    <p class="hero-subtitle">
+      Stay informed about recent natural disasters, emergencies, and critical alerts.
+      Get timely updates to know what’s happening and how you can stay safe.
+    </p>
+
+      <!-- Trusted Users -->
+    <div class="trusted-users">
+      <img class="user" src="OIP (1).jpeg" data-text="Trusted Member 1">
+      <img class="user" src="oip3.jpg" data-text="Trusted Member 2">
+      <img class="user" src="OIP (2).jpeg" data-text="Trusted Member 3">
+
+      <span id="trusted-users-text" class="english-text">
+        Plus 253 Trusted users!
+      </span>
+    </div>
+
+    <div class="button-group">
+      <button class="explore-btn">Explore</button>
+      <button class="arrow-btn">→</button>
+    </div>
+  </div>
+
+  <div class="hero-image-area">
+    <div class="product-image">
+      <div class="product-text-overlay">
+        DEAR ME<br>
+        Sacred Secret<br>
+        ILLUMINATING SAFFRON SERUM
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// SIMPLE SCROLL REVEAL
+const revealElements = document.querySelectorAll("[data-reveal]");
+function revealOnScroll() {
+  revealElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      el.classList.add("visible");
+    }
+  });
+}
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>

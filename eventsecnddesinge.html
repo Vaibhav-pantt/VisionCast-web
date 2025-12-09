@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HimSeva Apple-Style Event Page</title>
+
+<style>
+/* ------------------------------
+   APPLE STYLE BASE
+--------------------------------*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------
+   NAVBAR (Apple Glass)
+--------------------------------*/
+.navbar {
+    width: 100%;
+    padding: 14px 28px;
+    background: rgba(245,245,247,0.75);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+.navbar ul li a {
+    text-decoration: none;
+    color: #1d1d1f;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.25s;
+}
+.navbar ul li a:hover {
+    opacity: 0.5;
+}
+
+/* ------------------------------
+   HEADER
+--------------------------------*/
+.page-header {
+    text-align: center;
+    padding: 70px 20px 40px;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+.page-header small {
+    display: block;
+    margin-top: 5px;
+    color: #515154;
+    font-size: 18px;
+}
+
+/* ------------------------------
+   SLIDER
+--------------------------------*/
+.slider-container {
+    max-width: 900px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+}
+
+.slide {
+    display: none;
+}
+.slide.active {
+    display: block;
+    animation: fadeIn 1s ease forwards;
+}
+.slide img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Arrows */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.85);
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+.prev:hover, .next:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.05);
+}
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Dots */
+.dots {
+    text-align: center;
+    padding: 12px 0;
+}
+.dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background: #c6c6cf;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dot.active {
+    background: #1d1d1f;
+}
+
+/* ------------------------------
+   SECTIONS (Apple Cards)
+--------------------------------*/
+.section {
+    max-width: 900px;
+    margin: 35px auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.07);
+    animation: fadeIn 1s ease forwards;
+}
+.section h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 700;
+}
+.section p {
+    color: #4c4c4e;
+    font-size: 17px;
+}
+
+/* ------------------------------
+   TIMELINE
+--------------------------------*/
+.timeline {
+    max-width: 900px;
+    margin: 40px auto;
+    border-left: 4px solid #1d1d1f;
+    padding-left: 25px;
+}
+.timeline-item {
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 10px;
+}
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -13px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background: #1d1d1f;
+    border-radius: 50%;
+}
+.timeline-item h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+.timeline-item p {
+    margin: 8px 0 0;
+    color: #4c4c4e;
+}
+
+/* ------------------------------
+   BACK BUTTON
+--------------------------------*/
+.back-btn {
+    display: block;
+    width: 180px;
+    margin: 50px auto;
+    text-align: center;
+    background: #1d1d1f;
+    color: white;
+    padding: 12px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.back-btn:hover {
+    background: #000;
+    transform: scale(1.05);
+}
+
+/* MOBILE */
+@media(max-width: 600px) {
+    .slide img { height: 260px; }
+    .page-header { font-size: 32px; padding: 50px 10px 25px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Team</a></li>
+    </ul>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+    Community Cleanliness Drive
+    <small>Organized by HimSeva</small>
+</div>
+
+<!-- SLIDER -->
+<div class="slider-container">
+    <div class="slide active"><img src="OIP (1).jpeg"></div>
+    <div class="slide"><img src="OIP (2).jpeg"></div>
+    <div class="slide"><img src="oip3.jpg"></div>
+
+    <span class="prev">&#10094;</span>
+    <span class="next">&#10095;</span>
+
+    <div class="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
+
+<!-- SECTION -->
+<div class="section">
+    <h2>Event Overview</h2>
+    <p>
+        HimSeva organized a large-scale Community Cleanliness Drive to raise
+        awareness about hygiene, waste management, and environmental care.
+        Over 60 volunteers joined hands to clean public spaces and engage
+        with the community.
+    </p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline">
+    <div class="timeline-item">
+        <h3>📍 9:00 AM — Event Start</h3>
+        <p>Volunteers gathered, received instructions and safety gear.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>🧹 11:00 AM — Cleaning Activities</h3>
+        <p>Groups cleaned markets, roadsides, and public areas.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>🤝 2:00 PM — Awareness Drive</h3>
+        <p>Volunteers educated residents about hygiene and waste disposal.</p>
+    </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html#events-section" class="back-btn">← Back to Home</a>
+
+<script>
+/* Slider Logic */
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(n) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    dots.forEach(dot => dot.classList.remove("active"));
+
+    currentSlide = (n + slides.length) % slides.length;
+
+    slides[currentSlide].classList.add("active");
+    dots[currentSlide].classList.add("active");
+}
+
+document.querySelector(".next").onclick = () => showSlide(currentSlide + 1);
+document.querySelector(".prev").onclick = () => showSlide(currentSlide - 1);
+
+dots.forEach((dot, index) => {
+    dot.onclick = () => showSlide(index);
+});
+
+// Auto Slide every 3 seconds
+setInterval(() => {
+    showSlide(currentSlide + 1);
+}, 3000);
+</script>
+
+</body>
+</html>

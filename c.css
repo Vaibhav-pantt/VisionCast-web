@@ -392,64 +392,78 @@ nav.expanded .links a:hover {
 /* ============================
    DEPTH SCROLL ANIMATION
 ============================ */
-.about-glass {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
-    font-family: 'Georgia', 'Times New Roman', serif;
+/* About Section Container */
+/* SECTION BACKGROUND (Apple subtle grey) */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  min-height: 100vh;        /* Cover the full screen height */
+  padding: 60px 35px;
+  background: #fff;
+  border-radius: 0;          /* Optional: remove border radius for full screen */
+  box-shadow: none;          /* optional: remove shadow if full screen */
+  position: relative;
+  overflow: hidden;
 }
 
+
+/* CARD */
 .about-content {
-    position: relative;
-    background: #ffffff;
-    padding: 3rem 3rem;        /* increased side padding */
-    border-radius: 12px;
-    max-width: 1000px;         /* wider max width */
-    text-align: center;
-    border: 1px solid rgba(168, 181, 162, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  max-width: 850px;
+  background: rgba(255, 255, 255, 0.6); /* soft glass */
+  backdrop-filter: blur(20px);
+  padding: 45px 50px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-/* ============================
-   TYPOGRAPHY
-============================ */
-.about-content h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    color: #2D5016;
-    margin: 0 0 2.5rem 0;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    position: relative;
+/* SCROLL REVEAL ANIMATION TRIGGERED */
+.about-content.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.about-content h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: #D4A574;
-    margin: 1rem auto 0;
-    border-radius: 1px;
+/* TITLE */
+#about-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
 }
 
+/* PARAGRAPHS */
 .about-content p {
-    font-size: 1.15rem;
-    color: #1A2A1E;
-    line-height: 1.75;
-    margin: 0 0 1.75rem 0;
-    font-weight: 300;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 16px;
+  font-weight: 400;
 }
 
-.about-content p:last-of-type {
-    font-style: italic;
-    color: #2D5016;
-    font-weight: 400;
-    margin-bottom: 0;
+
+/* Scroll reveal base */
+[data-reveal], .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(.17,.67,.38,1.27);
+
 }
+
+/* When visible */
+[data-reveal].visible, .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* ============================
    RESPONSIVE
@@ -512,27 +526,169 @@ nav.expanded .links a:hover {
 
 
 /* Main Section */
+
+/* ------------------------------
+   HERO SECTION
+------------------------------- */
 .hero-section {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 25px;
-    padding: 80px 25px;        /* ⬆️ Increased top/bottom space */
-    background: #ffffff;
-    border-radius: 18px;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);  /* soft depth */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  min-height: 100vh;          /* Full viewport height */
+  margin: 0;                   /* Remove default margin */
+  padding: 80px 50px;          /* Padding inside the section */
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
+.hero-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .hero-content {
-    flex: 1;                        /* FIXED (was flex:1.) */
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex: 1;
+  min-width: 300px;
 }
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.hero-title em {
+  background: linear-gradient(90deg, #7a6cff, #a38dff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Buttons */ .button-group { display: flex; gap: 15px; } .explore-btn { padding: 12px 30px; background-color: #1d1d1f; color: #fff; border: none; border-radius: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; } .explore-btn:hover { background-color: #333; } .arrow-btn { padding: 12px 20px; background-color: #e1e1e4; color: #1d1d1f; border-radius: 14px; font-size: 18px; cursor: pointer; transition: all 0.3s ease; } .arrow-btn:hover { background-color: #d3d3d6; }
+
+.hero-image-area {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-image {
+  width: 360px;
+  height: 480px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-text-overlay {
+  text-align: center;
+  color: #d4a77e;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-text-overlay:hover {
+  transform: translateY(-5px);
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media(max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 60px 35px;
+  }
+  .hero-title {
+    font-size: 2.6rem;
+    text-align: center;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .hero-image-area {
+    margin-top: 30px;
+  }
+}
+/* =====================
+   MOBILE BUTTON REORDER
+===================== */
+@media(max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 50px 20px;
+  }
+
+  /* Move hero image above the buttons */
+  .hero-image-area {
+    order: 1;  /* show first */
+    margin-top: 0;
+    margin-bottom: 20px; /* spacing below image */
+  }
+
+  .button-group {
+    order: 2;  /* show after image */
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .product-image {
+    width: 260px;
+    height: 360px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    text-align: center;
+    order: 0; /* title stays at top */
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    text-align: center;
+    order: 0;
+  }
+}
+
+@media(max-width: 480px) {
+  .button-group {
+    order: 2;  /* show after image */
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+  }
+}
+
 
 /* Trusted Users */
 /* Container */
@@ -598,189 +754,6 @@ nav.expanded .links a:hover {
     animation: floatUpOnce 0.35s ease-out forwards;
 }
 
-
-
-/* Headings */
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 10px 0 15px 0;
-    line-height: 1.05;
-}
-
-.hero-title em {
-    font-family: 'Playfair Display', serif;
-    color: #d4a77e;
-}
-
-/* Subtitle */
-.hero-subtitle {
-    font-size: 1.15rem;
-    color: #666;
-    margin-bottom: 25px;
-}
-
-/* Buttons */
-.button-group {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-}
-
-.explore-btn {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 28px;
-    border: 2px solid #333;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.explore-btn:hover,
-.explore-btn:focus {
-    background-color: #555;
-    border-color: #555;
-    color: #fff;
-    outline: none;
-}
-
-.arrow-btn {
-    background-color: #eee;
-    color: #333;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    position: absolute;
-    right: 0px; 
-    left: 150px ;/* Positions arrow on RIGHT side, adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-}
-
-.arrow-btn:hover,
-.arrow-btn:focus {
-    background-color: #ddd;
-    border-color: #999;
-    color: #000;
-    outline: none;
-}
-
-
-/* Right Image Area */
-.hero-image-area {
-    flex: 1.2;
-    min-width: 320px;               /* Reduced from 350px */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;               /* 💥 Prevent scroll overflow */
-}
-
-/* Product Image */
-.product-image {
-    width: 340px;                   /* Reduced slightly */
-    height: 500px;
-    border-radius: 18px;
-    background: url('https://th.bing.com/th/id/OIP.EymcwoQSlatF4prgCrqdFQHaFP?w=151&h=108&c=7&qlt=90&bgcl=b2dd25&r=0&o=6&dpr=1.3&pid=13.1');
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Overlay Text */
-.product-text-overlay {
-    position: absolute;
-    text-align: center;
-    color: #d4a77e;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-}
-
-/* Responsive */
-@media (max-width: 750px) {
-
-    .hero-section {
-        flex-direction: column;
-        padding: 30px 18px;
-        text-align: center;                  /* Center text for modern mobile UI */
-        gap: 30px;
-    }
-
-    .hero-title {
-        font-size: 9vw;                      /* Smooth responsive title */
-        line-height: 1.1;
-    }
-
-    .hero-subtitle {
-        font-size: 4vw;
-        color: #555;
-        margin-top: 10px;
-    }
-
-    .trusted-users {
-        justify-content: center;             /* Center the avatars */
-        margin-bottom: 15px;
-    }
-.explore-btn {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 28px;
-    border-radius: 6px;
-    font-weight: 600;
-}
-
-.arrow-btn {
-    background-color: #eee;
-    color: #333;
-    padding: 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-}
-    .hero-image-area {
-        width: 100%;
-        min-width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .product-image {
-        width: 90%;                           /* Wider & more premium */
-        max-width: 380px;                     /* Prevent too large */
-        height: 450px;
-        border-radius: 20px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);   /* Clean drop shadow */
-        transform: translateY(0);
-        animation: floatUp 0.8s ease-out;     /* Smooth entry animation */
-    }
-
-    .product-text-overlay {
-        font-size: 1.2rem;                    /* Resize overlay text */
-        width: 90%;
-        line-height: 1.4;
-    }
-}
-
 /* Floating animation (premium feeling) */
 @keyframes floatUp {
     from {
@@ -793,7 +766,7 @@ nav.expanded .links a:hover {
     }
 }
 
-
+/* event css */
 
 .events-section {
   padding: 4rem 2rem;
@@ -994,6 +967,72 @@ nav.expanded .links a:hover {
 }
 
 
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 1024px) {
+  .events-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .events-track {
+    padding-left: 1rem;
+  }
+
+  .event-card {
+    flex: 0 0 200px;  /* slightly smaller cards */
+    padding: 1rem 0.8rem;
+  }
+
+  .event-card img {
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .event-card {
+    flex: 0 0 160px;   /* cards shrink for smaller phones */
+    padding: 0.8rem 0.6rem;
+  }
+
+  .event-card img {
+    height: 120px;
+  }
+
+  .events-track {
+    gap: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .event-card {
+    flex: 0 0 140px; /* smallest card width */
+    padding: 0.6rem 0.5rem;
+  }
+
+  .event-card img {
+    height: 100px;
+  }
+
+  .events-section::before {
+    height: 1px; /* thinner shimmer line on mobile */
+  }
+}
 
 /* Profile section with background image */
 #profile.profile {
@@ -1117,13 +1156,18 @@ nav.expanded .links a:hover {
     height: 160px;
   }
 }
-  .video-section {
-background: linear-gradient(to right, #fefcea, #f1da36);
-  padding: 60px 20px;
+.video-section {
+  background: linear-gradient(135deg, #fcfbfa, #f0e5c9); /* classic cream → soft gold */
+  padding: 80px 20px;
   margin-top: 80px; /* space after navbar */
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
+  color: #333; /* dark text for readability */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
+
 
 /* Section heading */
 #uploaded-title {
@@ -1294,7 +1338,6 @@ body, html {
 /* ================== TEAM SECTION ================== */
 #team {
   position: relative;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1305,6 +1348,7 @@ body, html {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100vh; /* Full height on desktop */
 }
 
 #team::before {
@@ -1465,6 +1509,11 @@ h3 {
 }
 
 @media (min-width: 769px) {
+   #team {
+    min-height: auto; /* Let content define height */
+    padding: 60px 15px; /* Adjust padding for mobile */
+    background-attachment: scroll; /* Fix issue with fixed bg on mobile */
+  }
   .modal-left {
     flex: 0 0 clamp(280px, 38%, 380px);
     border-bottom: none;

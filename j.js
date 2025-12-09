@@ -185,17 +185,11 @@ const translations = {
   // About
   "about-title": { en: "About Himalay Darshan", hi: "हिमालय दर्शन सामाजिक सेवा संस्थान " },
   "about-p1": { 
-    en: "Founded in 2019, Himalay Darshan is dedicated to addressing discrimination, social challenges, and human welfare issues.",
+    en: "  “Founded on September 30, 2025, Himalay Darshan Social Service Organization  works to promote Indian culture, human values, health, education, and the   holistic development of underprivileged women and children, while also  focusing on environmental and soil conservation, disaster awareness, preparedness, and relief efforts. Through positive initiatives and meaningful programs, it inspires action, drives change, addresses social challenges, and advances human welfare",
     hi: "30 सितंबर 2025 को स्थापित हिमालय दर्शन सामाजिक सेवा संस्थान समाज में भारतीय संस्कृति, मानव मूल्य, स्वास्थ्य,शिक्षा, गरीब महिला एवं बच्चों के सर्वांगीण विकास एवं पर्यावरण संरक्षण मृदा संरक्षण एवं प्राकृतिक एवं मानव जनित आपदा से संबंधित जानकारी एवं बचाव राहत कार्य करने तथा सकारात्मक पहलू और सार्थक कार्यक्रमों के माध्यम से जीवन में बदलाव लाने सामाजिक चुनौतियों का सामना करने और मानव कल्याण को बढ़ावा देने के लिए प्रेरित / कार्य करता है"
   },
-  "about-p2": { 
-    en: "Guided by integrity and inspired by the enduring strength of the Himalayas, we provide structured support, awareness programs, and empowerment resources for individuals facing social inequities and personal struggles.",
-    hi: "सत्यनिष्ठा द्वारा मार्गदर्शित और हिमालय की अटल शक्ति से प्रेरित, हम सामाजिक असमानताओं और व्यक्तिगत संघर्षों का सामना करने वाले व्यक्तियों के लिए संरचित समर्थन, जागरूकता कार्यक्रम और सशक्तिकरण संसाधन प्रदान करते हैं।" 
-  },
-  "about-p3": { 
-    en: "Just as the mountains stand firm against every storm, Himalay Darshan stands with people in their toughest moments—helping them find clarity, resilience, and hope.",
-    hi: "जैसे पहाड़ हर तूफान का सामना करते हैं, हिमालय दर्शन लोगों के सबसे कठिन समय में उनके साथ खड़ा रहता है—उन्हें स्पष्टता, सहनशीलता और आशा खोजने में मदद करता है।" 
-  },
+
+
 
   // User Info
   "user-info-title": { en: "👤 User Information", hi: "👤 उपयोगकर्ता जानकारी" },
@@ -212,18 +206,18 @@ const translations = {
 
   //latest news
    "trusted-users-text": { en: "Plus 253 Trusted users!", hi: "253+ विश्वसनीय उपयोगकर्ता!" },
-  "hero-title": { en: "Latest <br><em>Disaster Updates</em>", hi: "नवीनतम <br><em>आपदा अपडेट्स</em>" },
+  "hero-title": { en: "Latest <br><em> Updates</em>", hi: "नवीनतम <br><em> अपडेट्स</em>" },
   "hero-subtitle": { 
     en: "Stay informed about recent natural disasters, emergencies, and critical alerts. Get timely updates to know what’s happening and how you can stay safe.", 
     hi: "हाल की प्राकृतिक आपदाओं, आपात स्थितियों और महत्वपूर्ण अलर्ट के बारे में सूचित रहें। समय पर अपडेट पाएं और जानें कि क्या हो रहा है और कैसे सुरक्षित रहें।"
   },
-  "explore-btn": { en: "Explore", hi: "अन्वेषण करें" },
+  "explore-btn": { en: "Explore", hi: "अधिक जानकारी" },
   "product-text": { 
     en: "DEAR ME<br>Sacred Secret<br>ILLUMINATING SAFFRON SERUM", 
     hi: "डियर मी<br>पवित्र रहस्य<br>प्रकाशमान केसर सीरम"
-  },   "uploaded-title": { en: "Uploaded by Admin", hi: "हिमालय दर्शन सामाजिक सेवा संस्थान द्वारा अपलोड किया गया" },
+  },   "uploaded-title": { en: "Uploaded by HimSeva social service organization", hi: "हिमालय दर्शन सामाजिक सेवा संस्थान द्वारा अपलोड किया गया" },
     "uploaded-description": { 
-        en: "All videos are verified and uploaded by the VisionCast Admin Team — your trusted source for content.", 
+        en: "All videos are verified and uploaded by the HIMALAYA DARSHAN social service organization Team — your trusted source for content.", 
         hi: "सभी वीडियो  हिमालय दर्शन एडमिन टीम द्वारा सत्यापित और अपलोड किए जाते हैं — आपका विश्वसनीय स्रोत।" 
     },
         "team-title": {
@@ -466,6 +460,29 @@ window.addEventListener("keydown", (e) => {
     modal.style.display = "none";
   }
 });
+/* -------------------------------------------
+      Smooth Apple-style Scroll Reveal
+   ------------------------------------------- */
+(function () {
+  const revealElements = document.querySelectorAll("[data-reveal], .reveal");
 
+  function revealOnScroll() {
+    const winH = window.innerHeight;
 
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
 
+      // Reveal earlier for smoother Apple feel
+      if (rect.top < winH - 80) {
+        el.classList.add("visible");
+      }
+    });
+  }
+
+  // Run on scroll, resize, and initial load
+  window.addEventListener("scroll", revealOnScroll, { passive: true });
+  window.addEventListener("resize", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+
+  revealOnScroll();
+})();

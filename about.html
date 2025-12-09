@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Himalay Darshan — Event</title>
+
+  <!-- Apple-style system fonts -->
+  <style>
+    /* ---------------------------
+       BASE / TYPOGRAPHY
+    ----------------------------*/
+    :root{
+      --bg: #f5f5f7;
+      --text: #1d1d1f;
+      --muted: #6b6b70;
+      --card: #ffffff;
+      --accent: #1d1d1f;
+      --glass-border: rgba(0,0,0,0.04);
+      --radius: 18px;
+      --max-width: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.65;
+      letter-spacing: 0.01em;
+    }
+
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    .wrap {
+      width:100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------------------------
+       NAVBAR (Apple glass)
+    ----------------------------*/
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      width: 100%;
+      backdrop-filter: blur(18px);
+      background: rgba(245,245,247,0.75);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+    }
+
+    .nav-inner{
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .brand .logo {
+      width:44px;height:44px;border-radius:10px;
+      background: linear-gradient(135deg,#111,#333);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;
+      font-size:18px;
+    }
+
+    .nav-links {
+      display:flex;
+      gap:22px;
+      align-items:center;
+      font-size:15px;
+    }
+
+    .nav-links a { text-decoration:none; color:var(--text); opacity:0.95 }
+    .nav-links a:hover{ opacity:0.6 }
+
+    /* small / mobile */
+    @media (max-width:780px){
+      .nav-links{ display:none }
+      .nav-actions{ display:flex }
+    }
+
+    /* ---------------------------
+       HEADER / PAGE TITLE
+    ----------------------------*/
+    .page-header {
+      text-align:center;
+      padding: 64px 20px 28px;
+    }
+
+    .page-header h1 {
+      margin:0;
+      font-size:40px;
+      font-weight:700;
+      letter-spacing:-0.02em;
+    }
+
+    .page-header p {
+      margin-top:10px;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    /* ---------------------------
+       SLIDER (apple-clean)
+    ----------------------------*/
+    .slider {
+      max-width: 980px;
+      margin: 20px auto 28px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+      background: linear-gradient(180deg, #fff, #fff);
+    }
+
+    .slides {
+      position: relative;
+      height: 460px;
+      background: #eee;
+    }
+
+    .slide {
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity 0.9s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .slide.active{ opacity:1; z-index:2 }
+
+    .slide img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* caption */
+    .caption {
+      position:absolute;
+      left:24px;
+      bottom:22px;
+      background: rgba(255,255,255,0.9);
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      color:var(--text);
+      backdrop-filter: blur(6px);
+    }
+
+    /* arrows */
+    .arrow {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:48px;height:48px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.9);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+      cursor:pointer;
+      border:1px solid var(--glass-border);
+      transition: transform .18s ease;
+    }
+    .arrow:hover{ transform: translateY(-50%) scale(1.04) }
+    .arrow.prev{ left:16px }
+    .arrow.next{ right:16px }
+
+    .dots {
+      display:flex;gap:8px;align-items:center;justify-content:center;
+      padding:14px;background:transparent;
+    }
+    .dot {
+      width:12px;height:12px;border-radius:50%;background:#cfcfd6;cursor:pointer;transition:transform .18s,background .18s;
+    }
+    .dot.active{ background:#1d1d1f; transform:scale(1.2) }
+
+    /* ---------------------------
+       CONTENT / CARDS / ABOUT
+    ----------------------------*/
+    .section {
+      max-width: 980px;
+      margin: 32px auto;
+      padding: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.05);
+      border:1px solid var(--glass-border);
+    }
+
+    .card h2 { margin:0 0 12px; font-size:28px }
+    .card p { color:var(--muted); font-size:17px; margin:0 0 12px; line-height:1.75 }
+
+    /* timeline */
+    .timeline {
+      margin-top: 18px;
+      border-left: 4px solid #1d1d1f;
+      padding-left: 20px;
+    }
+    .timeline-item{ margin-bottom:20px; position:relative; padding-left:12px }
+    .timeline-item::before{
+      content:""; position:absolute; left:-12px; top:6px;
+      width:12px;height:12px;border-radius:50%;background:#1d1d1f;
+    }
+    .timeline-item h3 { margin:0; font-size:18px }
+    .timeline-item p { margin:6px 0 0; color:var(--muted) }
+
+    /* CTA */
+    .cta {
+      max-width:980px;
+      margin: 36px auto;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      padding:22px;
+      border-radius:16px;
+      background: linear-gradient(90deg,#fff,#fff);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border:1px solid var(--glass-border);
+    }
+    .cta-left h3{ margin:0 0 6px; font-size:20px }
+    .cta-left p{ margin:0; color:var(--muted) }
+    .cta-actions { display:flex; gap:12px; align-items:center }
+    .btn {
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:600;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid var(--glass-border);
+      background:#1d1d1f;
+      color:white;
+      transition: transform .14s ease, opacity .14s ease;
+    }
+    .btn.light {
+      background: #f7f7f8;
+      color:var(--text);
+      border:1px solid #e6e6e8;
+    }
+    .btn:hover{ transform:translateY(-2px) }
+
+    /* FOOTER */
+    footer {
+      margin-top: 48px;
+      padding: 36px 20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* ---------------------------
+       REVEAL ON SCROLL
+    ----------------------------*/
+    .reveal { opacity:0; transform: translateY(28px); transition: all 0.8s cubic-bezier(.2,.9,.25,1); }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ---------------------------
+       RESPONSIVE
+    ----------------------------*/
+    @media (max-width:980px){
+      .slides{ height:420px }
+    }
+    @media (max-width:720px){
+      .slides{ height:280px }
+      .page-header h1{ font-size:28px }
+      .card{ padding:20px }
+      .cta{ flex-direction:column; align-items:flex-start; gap:10px }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="navbar" role="banner">
+    <div class="nav-inner wrap">
+      <a class="brand" href="#">
+        <div class="logo" aria-hidden="true">HD</div>
+        <div>
+          <div style="font-weight:700">Himalay Darshan</div>
+          <div style="font-size:12px;color:var(--muted)">Social Service Organization</div>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <main>
+    <section class="page-header">
+      <div class="wrap">
+        <h1>Community Cleanliness Drive</h1>
+        <p>Organized by Himalay Darshan — spreading awareness, building healthy communities.</p>
+      </div>
+    </section>
+
+    <!-- SLIDER -->
+    <section class="slider" aria-label="Event gallery">
+      <div class="slides" id="slides-wrap">
+        <div class="slide active" role="group" aria-roledescription="slide" aria-label="Slide 1">
+          <img src="OIP (1).jpeg" alt="Volunteers cleaning the street">
+          <div class="caption">Volunteers at the cleaning drive</div>
+        </div>
+
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 2">
+          <img src="OIP (2).jpeg" alt="Awareness activity with locals">
+          <div class="caption">Community awareness activity</div>
+        </div>
+
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 3">
+          <img src="oip3.jpg" alt="Group photo after event">
+          <div class="caption">Group photo after the event</div>
+        </div>
+
+        <button class="arrow prev" id="prev" aria-label="Previous slide">◀</button>
+        <button class="arrow next" id="next" aria-label="Next slide">▶</button>
+      </div>
+
+      <div class="dots wrap" id="dotsWrap" aria-hidden="false"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-label="About Himalay Darshan">
+      <div class="card reveal" id="aboutCard">
+        <h2>About Himalay Darshan</h2>
+
+        <p>
+          “Founded on September 30, 2025, Himalay Darshan Social Service Organization 
+          works to promote Indian culture, human values, health, education, and the 
+          holistic development of underprivileged women and children, while also 
+          focusing on environmental and soil conservation, disaster awareness, 
+          preparedness, and relief efforts. Through positive initiatives and 
+          meaningful programs, it inspires action, drives change, addresses social 
+          challenges, and advances human welfare.”
+        </p>
+
+        <p>
+          Guided by integrity and inspired by the enduring strength of the Himalayas, 
+          we provide structured support, awareness programs, and empowerment resources 
+          for individuals facing social inequities and personal struggles.
+        </p>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline" class="section" aria-label="Event timeline">
+      <div class="card reveal" id="timelineCard">
+        <h2>Event Timeline</h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>📍 9:00 AM — Event Start</h3>
+            <p>Volunteers gathered, received instructions and safety gear.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🧹 11:00 AM — Cleaning Activities</h3>
+            <p>Teams cleaned markets, roadsides, and public areas.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>🤝 2:00 PM — Awareness Drive</h3>
+            <p>Volunteers educated residents about hygiene and waste disposal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta reveal" aria-label="Call to action">
+      <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div class="cta-left">
+          <h3>Join the next drive</h3>
+          <p>Volunteer with Himalay Darshan — make a difference in your community.</p>
+        </div>
+
+        <div class="cta-actions">
+          <a class="btn" href="#contact">Join Volunteer</a>
+          <a class="btn light" href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div style="margin-bottom:8px;">© <strong>Himalay Darshan</strong> — 2025</div>
+        <div style="color:var(--muted)">Address • Contact • Links</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script>
+    /* ---------------------------
+       SLIDER: auto play + controls
+    ----------------------------*/
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const dotsWrap = document.getElementById('dotsWrap');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      let idx = 0;
+      let timer = null;
+      const delay = 4000;
+
+      // build dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot';
+        dot.setAttribute('aria-label','Go to slide ' + (i+1));
+        dot.addEventListener('click', ()=> {
+          goTo(i); resetTimer();
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+      function update() {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }
+
+      function goTo(n){ idx = (n + slides.length) % slides.length; update(); }
+
+      nextBtn.addEventListener('click', ()=>{ goTo(idx+1); resetTimer(); });
+      prevBtn.addEventListener('click', ()=>{ goTo(idx-1); resetTimer(); });
+
+      // pause on hover
+      const sliderWrap = document.querySelector('.slides');
+      sliderWrap.addEventListener('mouseenter', ()=> pause());
+      sliderWrap.addEventListener('mouseleave', ()=> resume());
+
+      // keyboard left/right
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { goTo(idx-1); resetTimer(); }
+        if (e.key === 'ArrowRight') { goTo(idx+1); resetTimer(); }
+      });
+
+      function next(){ goTo(idx+1); }
+      function resetTimer(){ pause(); timer = setInterval(next, delay); }
+      function pause(){ if(timer){ clearInterval(timer); timer = null; } }
+      function resume(){ if(!timer) timer = setInterval(next, delay); }
+
+      // init
+      if(slides.length){
+        update();
+        timer = setInterval(next, delay);
+      }
+    })();
+
+    /* ---------------------------
+       SCROLL REVEAL (lightweight)
+    ----------------------------*/
+    (function(){
+      const reveals = document.querySelectorAll('.reveal');
+
+      function check(){
+        const win = window.innerHeight;
+        reveals.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if(rect.top < win - 80){
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', check, {passive:true});
+      window.addEventListener('resize', check);
+      window.addEventListener('load', check);
+      check();
+    })();
+
+    /* ---------------------------
+       Simple accessible skip-to content (optional)
+    ----------------------------*/
+    (function(){
+      // no-op for now; placeholder for future accessibility helpers
+    })();
+  </script>
+</body>
+</html>
